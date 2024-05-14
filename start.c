@@ -24,9 +24,23 @@ int	meassure_return(int axis, int width, int height)
 		return (0);
 	}
 	if (axis == 1)
+	{
+		if (width < 3)
+		{
+			ft_putstr("Map width too small.");
+			return (0);
+		}
 		return (width);
+	}
 	else if (axis == 2)
+	{
+		if (height < 3)
+		{
+			ft_putstr("Map height too small.");
+			return (0);
+		}
 		return (height);
+	}
 	return (0);
 }
 
@@ -49,23 +63,11 @@ int	meassure_check(int fd)
 	return (temp_width);
 }
 
-int	fd_and_first_line(int fd, int height, int width, int temp_width)
+int	first_line(int height, int width, int temp_width)
 {
-	if (temp_width == 0)
-	{
-		if (fd < 0)
-		{
-			ft_putstr("Error opening file.");
-			return (0);
-		}
-		return (1);
-	}
-	else
-	{
-		if (height == 0)
+	if (height == 0)
 			width = temp_width;
-		return (width);
-	}
+	return (width);
 }
 
 int	map_meassure(char *file, int axis)
@@ -76,7 +78,7 @@ int	map_meassure(char *file, int axis)
 	int		height;
 
 	fd = open(file, O_RDONLY);
-	temp_width = fd_and_first_line(fd, 0, 0, 0);
+	temp_width = 1;
 	width = 0;
 	height = 0;
 	while (temp_width > 0)
@@ -84,7 +86,7 @@ int	map_meassure(char *file, int axis)
 		temp_width = meassure_check(fd);
 		if (temp_width == -1)
 			break ;
-		width = fd_and_first_line(fd, height, width, temp_width);
+		width = first_line(height, width, temp_width);
 		if (temp_width != width)
 		{
 			ft_putstr("Map width error.");
@@ -99,6 +101,7 @@ int	map_meassure(char *file, int axis)
 int	check_file(char *file)
 {
 	int	i;
+	int	fd;
 
 	i = 0;
 	while (file[i + 1] != '\0')
@@ -106,6 +109,14 @@ int	check_file(char *file)
 	if (file[i - 3] != '.' || file[i - 2] != 'b'
 		|| file[i - 1] != 'e' || file[i] != 'r')
 		return (1);
+	fd = open(file, O_RDONLY);
+	if (fd <= 0)
+	{
+		ft_putstr("Error opening file.");
+		close (fd);
+		return (1);
+	}
+	close (fd);
 	return (0);
 }
 

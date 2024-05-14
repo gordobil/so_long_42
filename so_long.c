@@ -16,12 +16,27 @@
 #include <unistd.h>
 #include "so_long.h"
 
+void	print_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i][0] != '\0')
+	{
+		ft_putstr(map[i]);
+		i++;
+	}
+	ft_putstr("");
+}
 t_map	so_long(char *file)
 {
 	t_map	info;
 
 	info.width = map_meassure(file, 1);
 	info.height = map_meassure(file, 2);
+	if (info.width <= 0 || info.height <= 0)
+		return (info);
+	info.map = reserve_matrix(info.width, info.height, file);
 	return (info);
 }
 
@@ -35,6 +50,6 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	map_info = so_long(argv[1]);
-	printf ("w: %d\nh: %d\n", map_info.width, map_info.height);
+	print_map(map_info.map);
 	return (0);
 }

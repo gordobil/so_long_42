@@ -30,6 +30,7 @@ typedef struct s_map
 //START
 int					check_file(char *file);
 int					map_meassure(char *file, int axis);
+char				**reserve_matrix(int width, int height, char *file);
 
 //UTILS
 void				ft_putstr(char	*str);
