@@ -6,28 +6,19 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 10:56:14 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/05/14 13:34:50 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:08:21 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
 #include "so_long.h"
 
 int	meassure_return(int axis, int width, int height)
 {
-	if (height == width)
-	{
-		ft_putstr("Map must be rectangular");
-		return (0);
-	}
 	if (axis == 1)
 	{
 		if (width < 3)
 		{
-			ft_putstr("Map width too small.");
+			ft_putstr("Error\nMap width is too small.");
 			return (0);
 		}
 		return (width);
@@ -36,7 +27,7 @@ int	meassure_return(int axis, int width, int height)
 	{
 		if (height < 3)
 		{
-			ft_putstr("Map height too small.");
+			ft_putstr("Error\nMap height is too small.");
 			return (0);
 		}
 		return (height);
@@ -52,15 +43,17 @@ int	meassure_check(int fd)
 
 	temp_width = 0;
 	rd_file = 1;
+	read(fd, &c, 1);
+	if (c != '\n')
+		temp_width++;
 	while (c != '\n' && rd_file > 0)
 	{
 		rd_file = read(fd, &c, 1);
 		temp_width++;
 	}
-	temp_width--;
-	if (c == '\0')
-		return (-1);
-	return (temp_width);
+	if (temp_width > 2)
+		return (--temp_width);
+	return (0);
 }
 
 int	first_line(int height, int width, int temp_width)
@@ -84,12 +77,12 @@ int	map_meassure(char *file, int axis)
 	while (temp_width > 0)
 	{
 		temp_width = meassure_check(fd);
-		if (temp_width == -1)
+		if (temp_width == 0)
 			break ;
 		width = first_line(height, width, temp_width);
 		if (temp_width != width)
 		{
-			ft_putstr("Map width error.");
+			ft_putstr("Error\nMap must be rectanguar.");
 			return (0);
 		}
 		height++;
@@ -112,35 +105,10 @@ int	check_file(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd <= 0)
 	{
-		ft_putstr("Error opening file.");
+		ft_putstr("Error\nError opening file.");
 		close (fd);
 		return (1);
 	}
 	close (fd);
 	return (0);
 }
-
-/*unsigned int	map_size(char *file)
-{
-    int		fd;
-	int		size;
-	int		rd_file;
-	char	c;
-
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-	{
-		ft_putstr("Error opening file.");
-		return (0);
-	}
-	size = 0;
-	rd_file = 1;
-	while (rd_file > 0)
-	{
-		rd_file = read(fd, &c, 1);
-		size++;
-	}
-	size--;
-	close (fd);
-	return (size);
-}*/

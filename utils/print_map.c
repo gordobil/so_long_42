@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   print_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/14 12:09:28 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/05/20 11:47:22 by ngordobi         ###   ########.fr       */
+/*   Created: 2024/05/20 13:57:01 by ngordobi          #+#    #+#             */
+/*   Updated: 2024/05/20 13:57:17 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include "../so_long.h"
+#include "so_long.h"
 
-void	ft_putstr(char	*str)
+void	print_map(char **map)
 {
-	int	i;
+	int	y;
 
-	if (!str)
-		return ;
-	i = 0;
-	while (str[i] != '\0')
+	y = 0;
+	ft_putstr("");
+	while (map[y] != NULL)
 	{
-		write (1, &str[i], 1);
-		i++;
+		ft_putstr(map[y]);
+		y++;
 	}
-	write (1, "\n", 1);
+	ft_putstr("");
 }
