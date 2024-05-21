@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	load(int fd)
+void	load_dup(int fd)
 {
 	int		y;
 	int		x;
@@ -27,37 +27,37 @@ void	load(int fd)
 		rd_file = read (fd, &c, 1);
 		if (c == '\n' || c == '\0' || x == g_map.width)
 		{
-			g_map.map[y][x] = '\0';
+			g_map.map_dup[y][x] = '\0';
 			y++;
 			x = 0;
 		}
 		else
 		{
-			g_map.map[y][x] = c;
+			g_map.map_dup[y][x] = c;
 			x++;
 		}
 	}
 	close(fd);
 }
 
-void	map_load(char *file)
+void	map_dup_load(char *file)
 {
 	int		fd;
 	int		i;
 
-	g_map.map = malloc((g_map.height + 1) * sizeof(char *));
-	if (!g_map.map)
+	g_map.map_dup = malloc((g_map.height + 1) * sizeof(char *));
+	if (!g_map.map_dup)
 		return (0);
 	i = 0;
 	while (i < g_map.height)
 	{
-		g_map.map[i] = malloc((g_map.width + 1) * sizeof(char));
-		if (!g_map.map[i])
+		g_map.map_dup[i] = malloc((g_map.width + 1) * sizeof(char));
+		if (!g_map.map_dup[i])
 			return (0);
 		i++;
 	}
-	g_map.map[i] = malloc(1);
-	g_map.map[i] = NULL;
+	g_map.map_dup[i] = malloc(1);
+	g_map.map_dup[i] = NULL;
 	fd = open(file, O_RDONLY);
-	load(g_map.map, fd, width);
+	load(g_map.map_dup, fd, width);
 }

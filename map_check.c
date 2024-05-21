@@ -12,12 +12,16 @@
 
 #include "so_long.h"
 
-int	characters_aux(int chars[4], int letter)
+int	characters_aux(int chars[4], int letter, int y, int x)
 {
 	if (letter == 0)
 	{
 		if (chars[letter] == 0)
+		{
+			g_map.start_p_y = y;
+			g_map.start_p_x = x;
 			return (1);
+		}
 		else
 		{
 			ft_putstr("Error\nToo many characters in the map.");
@@ -37,26 +41,26 @@ int	characters_aux(int chars[4], int letter)
 	return (0);
 }
 
-int	characters(char **map)
+int	characters()
 {
 	int	x;
 	int	y;
-	int	*chars;
+	int	chars[4] = {0, 0, 0, 0};
 
-	chars = chars_to_zero(4);
+//	chars_to_zero(&chars[0], &chars[1], &chars[2], &chars[3]);
 	y = 1;
 	while (map[y] != NULL)
 	{
 		x = 1;
-		while (map[y][x] != '\0')
+		while (g_map.map[y][x] != '\0')
 		{
-			if (map[y][x] == 'P')
-				chars[0] = characters_aux(chars, 0);
-			else if (map[y][x] == 'E')
-				chars[1] = characters_aux(chars, 1);
-			else if (map[y][x] == 'C')
+			if (g_map.map[y][x] == 'P')
+				chars[0] = characters_aux(chars, 0, y, x);
+			else if (g_map.map[y][x] == 'E')
+				chars[1] = characters_aux(chars, 1, y, x);
+			else if (g_map.map[y][x] == 'C')
 				chars[2]++;
-			else if (map[y][x] != '0' || map[y][x] != '1')
+			else if (g_map.map[y][x] != '0' || map[y][x] != '1')
 				chars[3] = -1;
 			x++;
 		}
@@ -65,69 +69,77 @@ int	characters(char **map)
 	return (characters_ret(chars));
 }
 
-int	borders_aux(char **map, int y, int x, int axis)
+int	borders_aux(int y, int x, int axis)
 {
 	if (axis == 1)
 	{
-		while (map[y][x] != '\0')
+		while (g_map.map[y][x] != '\0')
 		{
-			if (map[y][x] != '1')
+			if (g_map.map[y][x] != '1')
 				break ;
 			x++;
 		}
-		if (map[y][x] != '\0')
+		if (g_map.map[y][x] != '\0')
 			return (-1);
 	}
 	else
 	{
-		if(map[y][x] != '1')
+		if(g_map.map[y][x] != '1')
 			return (-1);
-		while (map[y][x + 1] != '\0')
+		while (g_map.map[y][x + 1] != '\0')
 			x++;
-		if(map[y][x] != '1')
+		if(g_map.map[y][x] != '1')
 			return (-1);
 	}
 	return (0);
 }
 
-int	borders(char **map)
+int	borders()
 {
 	int	y;
 	int	x;
-	
+
 	y = 0;
-	while (map[y] != NULL)
+	while (g_map.map[y] != NULL)
 	{
 		x = 0;
-		if (y == 0 || (map[y + 1] == NULL))
+		if (y == 0 || (g_map.map[y + 1] == NULL))
 		{
-			if (borders_aux(map, y, x, 1) != 0)
+			if (borders_aux(g_map.map, y, x, 1) != 0)
 				break ;
 		}
 		else
 		{
-			if (borders_aux(map, y, x, 2) != 0)
+			if (borders_aux(g_map.map, y, x, 2) != 0)
 				break ;
 		}
 		y++;
 	}
-	if (map[y] != NULL)
+	if (g_map.map[y] != NULL)
 	{
-		ft_putstr("Error: map borders.");
+		ft_putstr("Error\nError in map borders.");
 		return (-1);
 	}
 	return (0);
 }
 
-int	map_check(char **map)
+int	map_check()
 {
 	int	errors;
 
-	errors = borders(map);
+	errors = borders();
 	if (errors != 0)
 		return(-1);
-	errors = characters(map);
+	errors = characters();
 	if (errors != 0)
+		return(-1);
+	errors = find_exit(g_map.start_p_y, g_map.start_p_x);
+	if (errors == 1)
+	{
+		ft_putstr("Error\nThere's no path to exit.");
+		return (-1);
+	}
+	else if (errors != 0)
 		return(-1);
 	return (0);
 }
