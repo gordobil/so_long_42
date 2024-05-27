@@ -59,7 +59,7 @@ int	meassure_check(int fd)
 int	first_line(int temp_width)
 {
 	if (g_map.height == 0)
-			g_map.width = temp_width;
+		g_map.width = temp_width;
 	return (g_map.width);
 }
 

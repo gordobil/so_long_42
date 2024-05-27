@@ -41,15 +41,17 @@ int	characters_aux(int chars[4], int letter, int y, int x)
 	return (0);
 }
 
-int	characters()
+int	characters(int y, int x)
 {
-	int	x;
-	int	y;
-	int	chars[4] = {0, 0, 0, 0};
+	int	i;
+	int	chars[4];
 
-//	chars_to_zero(&chars[0], &chars[1], &chars[2], &chars[3]);
+	i = 0;
+	while (i < 4)
+		chars[i++] = 0;
+	printf ("\ncharacters i: %d\n", i);
 	y = 1;
-	while (map[y] != NULL)
+	while (g_map.map[y] != NULL)
 	{
 		x = 1;
 		while (g_map.map[y][x] != '\0')
@@ -60,7 +62,7 @@ int	characters()
 				chars[1] = characters_aux(chars, 1, y, x);
 			else if (g_map.map[y][x] == 'C')
 				chars[2]++;
-			else if (g_map.map[y][x] != '0' || map[y][x] != '1')
+			else if (g_map.map[y][x] != '0' || g_map.map[y][x] != '1')
 				chars[3] = -1;
 			x++;
 		}
@@ -84,33 +86,30 @@ int	borders_aux(int y, int x, int axis)
 	}
 	else
 	{
-		if(g_map.map[y][x] != '1')
+		if (g_map.map[y][x] != '1')
 			return (-1);
 		while (g_map.map[y][x + 1] != '\0')
 			x++;
-		if(g_map.map[y][x] != '1')
+		if (g_map.map[y][x] != '1')
 			return (-1);
 	}
 	return (0);
 }
 
-int	borders()
+int	borders(int y, int x)
 {
-	int	y;
-	int	x;
-
 	y = 0;
 	while (g_map.map[y] != NULL)
 	{
 		x = 0;
 		if (y == 0 || (g_map.map[y + 1] == NULL))
 		{
-			if (borders_aux(g_map.map, y, x, 1) != 0)
+			if (borders_aux(y, x, 1) != 0)
 				break ;
 		}
 		else
 		{
-			if (borders_aux(g_map.map, y, x, 2) != 0)
+			if (borders_aux(y, x, 2) != 0)
 				break ;
 		}
 		y++;
@@ -123,16 +122,14 @@ int	borders()
 	return (0);
 }
 
-int	map_check()
+int	map_check(int errors)
 {
-	int	errors;
-
-	errors = borders();
+	errors = borders(0, 0);
 	if (errors != 0)
-		return(-1);
-	errors = characters();
+		return (-1);
+	errors = characters(1, 1);
 	if (errors != 0)
-		return(-1);
+		return (-1);
 	errors = find_exit(g_map.start_p_y, g_map.start_p_x);
 	if (errors == 1)
 	{
@@ -140,6 +137,6 @@ int	map_check()
 		return (-1);
 	}
 	else if (errors != 0)
-		return(-1);
+		return (-1);
 	return (0);
 }

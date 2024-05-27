@@ -10,11 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include "../so_long.h"
+#include "so_long.h"
 
 void	ft_putstr(char	*str)
 {

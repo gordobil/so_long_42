@@ -12,18 +12,18 @@
 
 #include "so_long.h"
 
-/* void	chars_to_zero(int *a, int *b, int *c, int *d)
-{
-	*a = 0;
-	*b = 0;
-	*c = 0;
-	*d = 0;
-} */
-
 int	characters_ret(int chars[4])
 {
-	if (chars[0] != 1 || chars[1] != 1)
+	if (chars[0] != 1)
+	{
+		ft_putstr("Error\nInvalid number of characters in the map.");
 		return (-1);
+	}
+	else if (chars[1] != 1)
+	{
+		ft_putstr("Error\nInvalid number of exits in the map.");
+		return (-1);
+	}
 	else if (chars[3] != 0)
 	{
 		ft_putstr("Error\nInvalid character found in the map.");
@@ -43,21 +43,29 @@ int	find_exit(int y, int x)
 		return (0);
 	else if (g_map.map_dup[y][x] != '1')
 		g_map.map_dup[y][x] = 'P';
-	if ((x - 1 >= 0) && (g_map.map_dup[y][x - 1] != '1')
-					&& (g_map.map_dup[y][x - 1] != 'P'))
+	if ((x - 1 >= 0) && (g_map.map_dup[y][x - 1] != '1') &&
+		(g_map.map_dup[y][x - 1] != 'P'))
+	{
 		if (find_exit(y, x - 1) == 0)
 			return (0);
+	}
 	else if ((x + 1 < g_map.width) && (g_map.map_dup[y][x + 1] != '1') &&
 			(g_map.map_dup[y][x + 1] != 'P'))
+	{
 		if (find_exit(y, x + 1) == 0)
 			return (0);
+	}
 	else if ((y - 1 >= 0) && (g_map.map_dup[y - 1][x] != '1') &&
 			(g_map.map_dup[y - 1][x] != 'P'))
+	{
 		if (find_exit(y - 1, x) == 0)
 			return (0);
+	}
 	else if ((y + 1 < g_map.height) && (g_map.map_dup[y + 1][x] != '1') &&
 			(g_map.map_dup[y + 1][x] != 'P'))
+	{
 		if (find_exit(y + 1, x) == 0)
 			return (0);
+	}
 	return (1);
 }
