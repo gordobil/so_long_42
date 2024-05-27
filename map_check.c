@@ -49,7 +49,6 @@ int	characters(int y, int x)
 	i = 0;
 	while (i < 4)
 		chars[i++] = 0;
-	printf ("\ncharacters i: %d\n", i);
 	y = 1;
 	while (g_map.map[y] != NULL)
 	{
