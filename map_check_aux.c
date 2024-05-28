@@ -37,32 +37,32 @@ int	characters_ret(int chars[4])
 	return (0);
 }
 
-int	find_exit(int y, int x)
+int	find_exit(int y, int x, t_map *g_map)
 {
-	if (g_map.map_dup[y][x] == 'E')
+	if (g_map->map_dup[y][x] == 'E')
 		return (0);
-	else if (g_map.map_dup[y][x] != '1')
-		g_map.map_dup[y][x] = 'P';
-	if ((x - 1 >= 0) && (g_map.map_dup[y][x - 1] != '1') &&
-		(g_map.map_dup[y][x - 1] != 'P'))
+	else if (g_map->map_dup[y][x] != '1')
+		g_map->map_dup[y][x] = 'P';
+	if ((x - 1 >= 0) && (g_map->map_dup[y][x - 1] != '1') &&
+		(g_map->map_dup[y][x - 1] != 'P'))
 	{
 		if (find_exit(y, x - 1) == 0)
 			return (0);
 	}
-	else if ((x + 1 < g_map.width) && (g_map.map_dup[y][x + 1] != '1') &&
-			(g_map.map_dup[y][x + 1] != 'P'))
+	else if ((x + 1 < g_map->width) && (g_map->map_dup[y][x + 1] != '1') &&
+			(g_map->map_dup[y][x + 1] != 'P'))
 	{
 		if (find_exit(y, x + 1) == 0)
 			return (0);
 	}
-	else if ((y - 1 >= 0) && (g_map.map_dup[y - 1][x] != '1') &&
-			(g_map.map_dup[y - 1][x] != 'P'))
+	else if ((y - 1 >= 0) && (g_map->map_dup[y - 1][x] != '1') &&
+			(g_map->map_dup[y - 1][x] != 'P'))
 	{
 		if (find_exit(y - 1, x) == 0)
 			return (0);
 	}
-	else if ((y + 1 < g_map.height) && (g_map.map_dup[y + 1][x] != '1') &&
-			(g_map.map_dup[y + 1][x] != 'P'))
+	else if ((y + 1 < g_map->height) && (g_map->map_dup[y + 1][x] != '1') &&
+			(g_map->map_dup[y + 1][x] != 'P'))
 	{
 		if (find_exit(y + 1, x) == 0)
 			return (0);

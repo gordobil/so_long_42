@@ -29,15 +29,13 @@ typedef struct s_map
 	int				start_p_x;
 }					t_map;
 
-t_map				g_map;
-
 //START
 int					check_file(char *file);
-int					map_meassure(char *file, int axis);
-char				**map_load(char *file);
-int					map_check(int errors);
+int					map_meassure(char *file, int axis, t_map *g_map);
+char				**map_load(char *file, t_map *g_map);
+int					map_check(int errors, t_map *g_map);
 int					characters_ret(int chars[4]);
-int					find_exit(int y, int x);
+int					find_exit(int y, int x, t_map *g_map);
 
 //UTILS
 void				ft_putstr(char	*str);
