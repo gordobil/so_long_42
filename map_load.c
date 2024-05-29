@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-char	**load(int fd, char **map)
+char	**load(int fd, char **map, int w)
 {
 	int		y;
 	int		x;
@@ -25,7 +25,7 @@ char	**load(int fd, char **map)
 	while (rd_file > 0)
 	{
 		rd_file = read (fd, &c, 1);
-		if (c == '\n' || c == '\0' || x == g_width)
+		if (c == '\n' || c == '\0' || x == w)
 		{
 			map[y][x] = '\0';
 			y++;
@@ -41,19 +41,19 @@ char	**load(int fd, char **map)
 	return (map);
 }
 
-char	**map_load(char *file)
+char	**map_load(char *file, int w, int h)
 {
 	char	**map;
 	int		fd;
 	int		i;
 
-	map = malloc((g_height + 1) * sizeof(char *));
+	map = malloc((h + 1) * sizeof(char *));
 	if (!map)
 		return (0);
 	i = 0;
-	while (i < g_height)
+	while (i < h)
 	{
-		map[i] = malloc((g_width + 1) * sizeof(char));
+		map[i] = malloc((w + 1) * sizeof(char));
 		if (!map[i])
 			return (0);
 		i++;
@@ -61,5 +61,5 @@ char	**map_load(char *file)
 	map[i] = malloc(1);
 	map[i] = NULL;
 	fd = open(file, O_RDONLY);
-	return (load(fd, map));
+	return (load(fd, map, w));
 }

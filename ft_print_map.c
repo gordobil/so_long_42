@@ -27,6 +27,7 @@ void	print_title(int x, int m)
 	}
 	ft_putstr("");
 }
+
 void	ft_print_map(char **map)
 {
 	int	x;

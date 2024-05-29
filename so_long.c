@@ -14,14 +14,20 @@
 
 void	so_long(char *file)
 {
-	map_meassure(file, 1);
-	map_meassure(file, 2);
-	if (g_width <= 0 || g_height <= 0)
+	char	**map;
+	int		map_width;
+	int		map_height;
+
+	map_width = map_meassure(file, 1);
+	if (map_width <= 0)
 		return ;
-	g_map = map_load(file);
-	g_map_dup = map_load(file);
-	if (map_check(0) != 0)
+	map_height = map_meassure(file, 2);
+	if (map_height <= 0)
 		return ;
+	map = map_load(file, map_width, map_height);
+	if (map_check(map, map_width, map_height) != 0)
+		return ;
+	ft_print_map(map);
 }
 
 int	main(int argc, char **argv)
@@ -32,6 +38,5 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	so_long(argv[1]);
-	ft_print_map(g_map);
 	return (0);
 }
