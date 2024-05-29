@@ -12,14 +12,14 @@
 
 #include "so_long.h"
 
-int	characters_aux(int chars[4], int letter, int y, int x, t_map *g_map)
+int	characters_aux(int chars[4], int letter, int y, int x)
 {
 	if (letter == 0)
 	{
 		if (chars[letter] == 0)
 		{
-			g_map->start_p_y = y;
-			g_map->start_p_x = x;
+			g_start_y = y;
+			g_start_x = x;
 			return (1);
 		}
 		else
@@ -41,7 +41,7 @@ int	characters_aux(int chars[4], int letter, int y, int x, t_map *g_map)
 	return (0);
 }
 
-int	characters(int y, int x, t_map *g_map)
+int	characters(int y, int x)
 {
 	int	i;
 	int	chars[4];
@@ -50,18 +50,18 @@ int	characters(int y, int x, t_map *g_map)
 	while (i < 4)
 		chars[i++] = 0;
 	y = 1;
-	while (g_map->map[y] != NULL)
+	while (g_map[y] != NULL)
 	{
 		x = 1;
-		while (g_map->map[y][x] != '\0')
+		while (g_map[y][x] != '\0')
 		{
-			if (g_map->map[y][x] == 'P')
-				chars[0] = characters_aux(chars, 0, y, x, &g_map);
-			else if (g_map->map[y][x] == 'E')
-				chars[1] = characters_aux(chars, 1, y, x, &g_map);
-			else if (g_map->map[y][x] == 'C')
+			if (g_map[y][x] == 'P')
+				chars[0] = characters_aux(chars, 0, y, x);
+			else if (g_map[y][x] == 'E')
+				chars[1] = characters_aux(chars, 1, y, x);
+			else if (g_map[y][x] == 'C')
 				chars[2]++;
-			else if (g_map->map[y][x] != '0' || g_map->map[y][x] != '1')
+			else if (g_map[y][x] != '0' || g_map[y][x] != '1')
 				chars[3] = -1;
 			x++;
 		}
@@ -70,50 +70,49 @@ int	characters(int y, int x, t_map *g_map)
 	return (characters_ret(chars));
 }
 
-int	borders_aux(int y, int x, int axis, t_map *g_map)
+int	borders_aux(int y, int x, int axis)
 {
 	if (axis == 1)
 	{
-		while (g_map->map[y][x] != '\0')
+		while (g_map[y][x] != '\0')
 		{
-			if (g_map->map[y][x] != '1')
+			if (g_map[y][x] != '1')
 				break ;
 			x++;
 		}
-		if (g_map->map[y][x] != '\0')
+		if (g_map[y][x] != '\0')
 			return (-1);
 	}
 	else
 	{
-		if (g_map->map[y][x] != '1')
+		if (g_map[y][x] != '1')
 			return (-1);
-		while (g_map->map[y][x + 1] != '\0')
+		while (g_map[y][x + 1] != '\0')
 			x++;
-		if (g_map->map[y][x] != '1')
+		if (g_map[y][x] != '1')
 			return (-1);
 	}
 	return (0);
 }
 
-int	borders(int y, int x, t_map *g_map)
+int	borders(int y, int x)
 {
-	y = 0;
-	while (g_map->map[y] != NULL)
+	while (g_map[y] != NULL)
 	{
 		x = 0;
-		if (y == 0 || (g_map->map[y + 1] == NULL))
+		if (y == 0 || (g_map[y + 1] == NULL))
 		{
-			if (borders_aux(y, x, 1, &g_map) != 0)
+			if (borders_aux(y, x, 1) != 0)
 				break ;
 		}
 		else
 		{
-			if (borders_aux(y, x, 2, &g_map) != 0)
+			if (borders_aux(y, x, 2) != 0)
 				break ;
 		}
 		y++;
 	}
-	if (g_map->map[y] != NULL)
+	if (g_map[y] != NULL)
 	{
 		ft_putstr("Error\nError in map borders.");
 		return (-1);
@@ -121,15 +120,13 @@ int	borders(int y, int x, t_map *g_map)
 	return (0);
 }
 
-int	map_check(int errors, t_map *g_map)
+int	map_check(int errors)
 {
-	errors = borders(0, 0, &g_map);
-	if (errors != 0)
+	if (borders(0, 0) != 0)
 		return (-1);
-	errors = characters(1, 1, &g_map);
-	if (errors != 0)
+	if (characters(1, 1) != 0)
 		return (-1);
-	errors = find_exit(g_map->start_p_y, g_map->start_p_x, &g_map);
+	errors = find_exit(g_start_y, g_start_x);
 	if (errors == 1)
 	{
 		ft_putstr("Error\nThere's no path to exit.");

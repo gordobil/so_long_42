@@ -12,27 +12,26 @@
 
 #include "so_long.h"
 
-void	so_long(char *file, t_map *g_map)
+void	so_long(char *file)
 {
-	map_meassure(file, 1, &g_map);
-	map_meassure(file, 2, &g_map);
-	if (g_map->width <= 0 || g_map->height <= 0)
+	map_meassure(file, 1);
+	map_meassure(file, 2);
+	if (g_width <= 0 || g_height <= 0)
 		return ;
-	g_map->map = map_load(file, &g_map);
-	g_map->map_dup = map_load(file, &g_map);
-	g_map->errors = map_check(0, &g_map);
+	g_map = map_load(file);
+	g_map_dup = map_load(file);
+	if (map_check(0) != 0)
+		return ;
 }
 
 int	main(int argc, char **argv)
 {
-	t_map	g_map;
-
 	if (argc != 2 || check_file(argv[1]) != 0)
 	{
 		ft_putstr("Error\nInvalid map.");
 		return (0);
 	}
-	so_long(argv[1], &g_map);
-	ft_print_map(g_map.map);
+	so_long(argv[1]);
+	ft_print_map(g_map);
 	return (0);
 }

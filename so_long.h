@@ -18,7 +18,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 
-typedef struct s_map
+/* typedef struct s_map
 {
 	char			**map;
 	char			**map_dup;
@@ -28,17 +28,25 @@ typedef struct s_map
 	int				start_p_y;
 	int				start_p_x;
 }					t_map;
+t_map				g_map; */
+
+char	**g_map;
+char	**g_map_dup;
+int		g_width;
+int		g_height;
+int		g_start_y;
+int		g_start_x;
 
 //START
-int					check_file(char *file);
-int					map_meassure(char *file, int axis, t_map *g_map);
-char				**map_load(char *file, t_map *g_map);
-int					map_check(int errors, t_map *g_map);
-int					characters_ret(int chars[4]);
-int					find_exit(int y, int x, t_map *g_map);
+int		check_file(char *file);
+int		map_meassure(char *file, int axis);
+char	**map_load(char *file);
+int		map_check(int errors);
+int		characters_ret(int chars[4]);
+int		find_exit(int y, int x);
 
 //UTILS
-void				ft_putstr(char	*str);
-void				ft_print_map(char **map);
+void	ft_putstr(char	*str);
+void	ft_print_map(char **map);
 
 #endif

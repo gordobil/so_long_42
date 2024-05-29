@@ -12,25 +12,25 @@
 
 #include "so_long.h"
 
-int	meassure_return(int axis, t_map *g_map)
+int	meassure_return(int axis)
 {
 	if (axis == 1)
 	{
-		if (g_map->width < 3)
+		if (g_width < 3)
 		{
 			ft_putstr("Error\nMap width is too small.");
 			return (0);
 		}
-		return (g_map->width);
+		return (g_width);
 	}
 	else if (axis == 2)
 	{
-		if (g_map->height < 3)
+		if (g_height < 3)
 		{
 			ft_putstr("Error\nMap height is too small.");
 			return (0);
 		}
-		return (g_map->height);
+		return (g_height);
 	}
 	return (0);
 }
@@ -56,37 +56,37 @@ int	meassure_check(int fd)
 	return (0);
 }
 
-int	first_line(int temp_width, t_map *g_map)
+int	first_line(int temp_width)
 {
-	if (g_map->height == 0)
-		g_map->width = temp_width;
-	return (g_map->width);
+	if (g_height == 0)
+		g_width = temp_width;
+	return (g_width);
 }
 
-int	map_meassure(char *file, int axis, t_map *g_map)
+int	map_meassure(char *file, int axis)
 {
 	int		fd;
 	int		temp_width;
 
 	fd = open(file, O_RDONLY);
 	temp_width = 1;
-	g_map->width = 0;
-	g_map->height = 0;
+	g_width = 0;
+	g_height = 0;
 	while (temp_width > 0)
 	{
 		temp_width = meassure_check(fd);
 		if (temp_width == 0)
 			break ;
-		g_map->width = first_line(temp_width, &g_map);
-		if (temp_width != g_map->width)
+		g_width = first_line(temp_width);
+		if (temp_width != g_width)
 		{
 			ft_putstr("Error\nMap must be rectanguar.");
 			return (0);
 		}
-		g_map->height++;
+		g_height++;
 	}
 	close (fd);
-	return (meassure_return(axis, &g_map));
+	return (meassure_return(axis));
 }
 
 int	check_file(char *file)
