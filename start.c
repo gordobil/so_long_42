@@ -38,60 +38,48 @@ int	meassure_return(int axis, int w, int h)
 int	meassure_check(int fd)
 {
 	char	c;
-	int		temp_width;
-	int		rd_file;
+	int		rd;
+	int		temp_w;
 
-	temp_width = 0;
-	rd_file = 1;
-	read(fd, &c, 1);
-	if (c != '\n')
-		temp_width++;
-	while (c != '\n' && rd_file > 0)
+	rd = 1;
+	temp_w = 0;
+	while (rd > 0)
 	{
-		rd_file = read(fd, &c, 1);
-		temp_width++;
+		rd = read(fd, &c, 1);
+		if (c == '\n' || c == '\0' || c == '\r')
+			break ;
+		temp_w++;
 	}
-	if (temp_width > 2)
-	{
-		if (rd_file > 0)
-			return (--temp_width);
-		return (temp_width);
-	}
-	return (0);
-}
-
-int	first_line(int temp_width, int w, int h)
-{
-	if (h == 0)
-		w = temp_width;
-	return (w);
+	rd = read(fd, &c, 1);
+	if (rd == 0)
+		return (-1);
+	return (temp_w);
 }
 
 int	map_meassure(char *file, int axis)
 {
 	int	fd;
-	int	temp_width;
 	int	w;
 	int	h;
+	int	temp_w;
 
 	fd = open(file, O_RDONLY);
-	temp_width = 1;
 	w = 0;
 	h = 0;
-	while (temp_width > 0)
+	temp_w = 1;
+	while (temp_w > 0)
 	{
-		temp_width = meassure_check(fd);
-		if (temp_width == 0)
-			break ;
-		w = first_line(temp_width, w, h);
-		if (temp_width != w)
+		temp_w = meassure_check(fd);
+		if (h == 0)
+			w = temp_w;
+		if (temp_w > 0 && temp_w == w)
+			h++;
+		else if (temp_w == -1)
 		{
-			ft_putstr("Error\nMap must be rectanguar.");
-			return (0);
+			h++;
+			break ;
 		}
-		h++;
 	}
-	close (fd);
 	return (meassure_return(axis, w, h));
 }
 

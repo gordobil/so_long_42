@@ -24,7 +24,9 @@ void	so_long(char *file)
 	map_height = map_meassure(file, 2);
 	if (map_height <= 0)
 		return ;
+	printf ("w:%d h:%d\n", map_width, map_height);
 	map = map_load(file, map_width, map_height);
+	ft_print_map(map);
 	if (map_check(map, map_width, map_height) != 0)
 		return ;
 	ft_print_map(map);
