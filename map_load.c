@@ -27,10 +27,8 @@ char	**load(int fd, char **map, int w, int y)
 			break ;
 		if (x == w || c == '\n' || c == '\0' || c == '\r')
 		{
-			map[y][x] = '\0';
+			map[y++][x] = '\0';
 			read (fd, &c, 1);
-			read (fd, &c, 1);
-			y++;
 			x = 0;
 		}
 		else
@@ -63,5 +61,11 @@ char	**map_load(char *file, int w, int h)
 	map[i] = malloc(1);
 	map[i] = NULL;
 	fd = open(file, O_RDONLY);
-	return (load(fd, map, w, 0));
+	map = load(fd, map, w, 0);
+	if (map[i - 1][0] == '\0')
+	{
+		free (map[i]);
+		map[i - 1] = NULL;
+	}
+	return (map);
 }

@@ -20,7 +20,7 @@ int	characters_aux(int chars[4], int letter)
 			return (1);
 		else
 		{
-			ft_putstr("Error\nToo many characters in the map.");
+			ft_putstr("Error\nToo many characters in the map");
 			return (-1);
 		}
 	}
@@ -30,7 +30,7 @@ int	characters_aux(int chars[4], int letter)
 			return (1);
 		else
 		{
-			ft_putstr("Error\nToo many exits in the map.");
+			ft_putstr("Error\nToo many exits in the map");
 			return (-1);
 		}
 	}
@@ -48,8 +48,8 @@ int	characters(int y, int x, char **map)
 	y = 1;
 	while (map[y] != NULL)
 	{
-		x = 1;
-		while (map[y][x] != '\0')
+		x = 0;
+		while (map[y][x++] != '\0')
 		{
 			if (map[y][x] == 'P')
 				chars[0] = characters_aux(chars, 0);
@@ -57,9 +57,9 @@ int	characters(int y, int x, char **map)
 				chars[1] = characters_aux(chars, 1);
 			else if (map[y][x] == 'C')
 				chars[2]++;
-			else if (map[y][x] != '0' || map[y][x] != '1')
+			else if (map[y][x] != '0' && map[y][x] != '1' && map[y][x] != 'P' &&
+					map[y][x] != 'E' && map[y][x] != 'C' && map[y][x] != '\0')
 				chars[3] = -1;
-			x++;
 		}
 		y++;
 	}
@@ -72,7 +72,6 @@ int	borders_aux(int y, int x, int axis, char **map)
 	{
 		while (map[y][x] != '\0')
 		{
-			printf ("%d,%d:%d\n", y, x, map[y][x]);
 			if (map[y][x] != '1')
 				break ;
 			x++;
@@ -109,16 +108,15 @@ int	borders(int y, int x, char **map)
 		}
 		y++;
 	}
-	ft_putstr(map[y]);
 	if (map[y] != NULL)
 	{
-		ft_putstr("Error\nError in map borders.");
+		ft_putstr("Error\nError in map borders");
 		return (-1);
 	}
 	return (0);
 }
 
-int	map_check(char **map, int map_w, int map_h)
+int	map_check(char **map, int map_w)
 {
 	int	start_y;
 	int	start_x;
@@ -127,16 +125,17 @@ int	map_check(char **map, int map_w, int map_h)
 		return (-1);
 	if (characters(1, 1, map) != 0)
 		return (-1);
-	start_y = start_point(map, 1);
-	start_x = start_point(map, 2);
+	start_y = start_coords(map, 'y');
+	start_x = start_coords(map, 'x');
 	if (start_y < 0 || start_x < 0)
 		return (-1);
-	if (find_exit(start_y, start_x, map, map_w, map_h) == 1)
+	if (find_exit(start_y, start_x, map, ft_remeassure(map, 'C')) == 1)
 	{
-		ft_putstr("Error\nThere's no path to exit.");
+		ft_putstr("Error\nThere's no path to exit");
 		return (-1);
 	}
-	else if (find_exit(start_y, start_x, map, map_w, map_h) != 0)
+	else if (find_exit(start_y, start_x, map, ft_remeassure(map, 'C')) != 0 &&
+			find_exit(start_y, start_x, map, ft_remeassure(map, 'C')) != 1)
 		return (-1);
 	return (0);
 }

@@ -20,15 +20,19 @@
 
 //START
 int			check_file(char *file);
-int			map_meassure(char *file, int axis);
+int			map_meassure(char *file, char axis);
 char		**map_load(char *file, int w, int h);
-int			map_check(char **map, int map_w, int map_h);
+
+//CHECK
+int			map_check(char **map, int map_w);
 int			characters_ret(int chars[4]);
-int			start_point(char **map, int axis);
-int			find_exit(int y, int x, char **map, int map_w, int map_h);
+int			start_coords(char **map, char axis);
+int			find_exit(int y, int x, char **map, int coins);
 
 //UTILS
 void		ft_putstr(char	*str);
 void		ft_print_map(char **map);
+void		ft_print_map_ascii(char **map);
+int			ft_remeassure(char **map, char axis);
 
 #endif

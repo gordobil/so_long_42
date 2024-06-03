@@ -12,9 +12,9 @@
 
 #include "so_long.h"
 
-int	meassure_return(int axis, int w, int h)
+int	meassure_return(char axis, int w, int h)
 {
-	if (axis == 1)
+	if (axis == 'w')
 	{
 		if (w < 3)
 		{
@@ -23,7 +23,7 @@ int	meassure_return(int axis, int w, int h)
 		}
 		return (w);
 	}
-	else if (axis == 2)
+	else if (axis == 'h')
 	{
 		if (h < 3)
 		{
@@ -56,7 +56,7 @@ int	meassure_check(int fd)
 	return (temp_w);
 }
 
-int	map_meassure(char *file, int axis)
+int	map_meassure(char *file, char axis)
 {
 	int	fd;
 	int	w;

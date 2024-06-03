@@ -51,3 +51,24 @@ void	ft_print_map(char **map)
 	}
 	ft_putstr("");
 }
+
+void	ft_print_map_ascii(char **map)
+{
+	int	x;
+	int	y;
+
+	printf("\n\nMAP IN ASCII:\n");
+	y = 0;
+	while (map[y] != NULL)
+	{
+		x = 0;
+		while (map[y][x] != '\0')
+		{
+			printf ("%d ", map[y][x]);
+			x++;
+		}
+		printf ("%d/\n", map[y][x]);
+		y++;
+	}
+	printf ("\n\n");
+}

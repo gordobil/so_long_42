@@ -18,16 +18,17 @@ void	so_long(char *file)
 	int		map_width;
 	int		map_height;
 
-	map_width = map_meassure(file, 1);
+	map_width = map_meassure(file, 'w');
 	if (map_width <= 0)
 		return ;
-	map_height = map_meassure(file, 2);
+	map_height = map_meassure(file, 'h');
 	if (map_height <= 0)
 		return ;
-	printf ("w:%d h:%d\n", map_width, map_height);
 	map = map_load(file, map_width, map_height);
+	map_height = ft_remeassure(map, 'h');
 	ft_print_map(map);
-	if (map_check(map, map_width, map_height) != 0)
+	ft_putstr("");
+	if (map_check(map, map_width) != 0)
 		return ;
 	ft_print_map(map);
 }
