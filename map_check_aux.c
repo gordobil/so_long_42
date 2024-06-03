@@ -69,45 +69,34 @@ int	start_coords(char **map, char axis)
 
 int	find_exit(int y, int x, char **map, int coins)
 {
-	int	h;
-	int	w;
+	int			h;
+	int			w;
+	static int	e;
 
+	printf ("e:%d c:%d\n", e, coins);
+	ft_print_map(map);
+	ft_putstr("");
 	h = ft_remeassure(map, 'h');
 	w = ft_remeassure(map, 'w');
-	if (map[y][x] == 'E' && coins == 0)
-	{
-		printf ("coins:%d\n", coins);
-		return (0);
-	}
-	else if (map[y][x] != '1')
+	if (map[y][x] == 'E')
+		e = 1;
+	else if (map[y][x] == 'C')
+		coins--;
+	if (map[y][x] != '1')
 		map[y][x] = 'X';
+	if (e == 1 && coins == 0)
+		return (0);
 	if ((x - 1 > 0) && (map[y][x - 1] != '1') && (map[y][x - 1] != 'X'))
-	{
-		if (map[y][x - 1] == 'C')
-			coins--;
 		if (find_exit(y, x - 1, map, coins) == 0)
 			return (0);
-	}
-	if ((x + 1 < w) && (map[y][x + 1] != '1') && (map[y][x + 1] != 'X'))
-	{
-		if (map[y][x + 1] == 'C')
-			coins--;
+	if ((x + 1 < w) && (map[y][x + 1] != '1') && (map[y][x + 1] != 'X'))		
 		if (find_exit(y, x + 1, map, coins) == 0)
 			return (0);
-	}
 	if ((y - 1 > 0) && (map[y - 1][x] != '1') && (map[y - 1][x] != 'X'))
-	{
-		if (map[y - 1][x] == 'C')
-			coins--;
 		if (find_exit(y - 1, x, map, coins) == 0)
 			return (0);
-	}
 	if ((y + 1 < h) && (map[y + 1][x] != '1') && (map[y + 1][x] != 'X'))
-	{
-		if (map[y + 1][x] == 'C')
-			coins--;
 		if (find_exit(y + 1, x, map, coins) == 0)
 			return (0);
-	}
 	return (1);
 }
