@@ -18,23 +18,17 @@ void	so_long(char *file)
 	int		map_width;
 	int		map_height;
 
-	map_width = map_meassure(file, 'w');
+	map_width = meassure_map(file, 'w');
 	if (map_width <= 0)
 		return ;
-	map_height = map_meassure(file, 'h');
+	map_height = meassure_map(file, 'h');
 	if (map_height <= 0)
 		return ;
-	map = map_load(file, map_width, map_height);
-	ft_putstr("START:");
-	ft_print_map(map);
-	ft_putstr("");
+	map = load_map(file, map_width, map_height);
 	map_height = count(map, 'h');
-	if (map_check(map, map_width) != 0)
+	if (check_map(map) != 0)
 		return ;
-	ft_putstr("");
-	ft_putstr("");
-	ft_putstr("END:");
-	ft_print_map(map);
+	ft_putstr("MAP OK");
 }
 
 int	main(int argc, char **argv)

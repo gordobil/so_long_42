@@ -20,11 +20,11 @@
 
 //START
 int			check_file(char *file);
-int			map_meassure(char *file, char axis);
-char		**map_load(char *file, int w, int h);
+int			meassure_map(char *file, char axis);
+char		**load_map(char *file, int w, int h);
 
 //CHECK
-int			map_check(char **map, int map_w);
+int			check_map(char **map);
 int			characters_ret(int chars[4]);
 int			start_coords(char **map, char axis);
 int			find_exit(int y, int x, char **map);

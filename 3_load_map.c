@@ -41,7 +41,7 @@ char	**load(int fd, char **map, int w, int y)
 	return (map);
 }
 
-char	**map_load(char *file, int w, int h)
+char	**load_map(char *file, int w, int h)
 {
 	char	**map;
 	int		fd;

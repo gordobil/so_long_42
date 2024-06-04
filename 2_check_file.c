@@ -56,7 +56,7 @@ int	meassure_check(int fd)
 	return (temp_w);
 }
 
-int	map_meassure(char *file, char axis)
+int	meassure_map(char *file, char axis)
 {
 	int	fd;
 	int	w;

@@ -6,7 +6,7 @@
 #    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/27 13:03:33 by ngordobi          #+#    #+#              #
-#    Updated: 2024/05/27 14:36:06 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/06/04 13:16:34 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ CCFLAGS = -Wall -Wextra -Werror
 REMOVE = rm -f
 LIBRARY = ar rc
 
-SOURCES = so_long.c start.c map_load.c map_check.c map_check_aux.c \
-			ft_putstr.c ft_print_map.c\
+SOURCES = 1_so_long.c 2_check_file.c 3_load_map.c 4_check_map.c \
+			5_check_map_aux.c ft_count.c ft_print_map.c ft_putstr.c \
 
 OBJECTS = $(SOURCES:.c=.o)
 

@@ -22,19 +22,19 @@ int	characters_ret(int chars[4])
 		ft_putstr("Error\nInvalid number of players in the map");
 		errors = -1;
 	}
-	else if (chars[1] != 1)
+	if (chars[1] != 1)
 	{
 		ft_putstr("Error\nInvalid number of exits in the map");
 		errors = -1;
 	}
-	else if (chars[3] != 0)
+	if (chars[2] < 1)
 	{
-		ft_putstr("Error\nInvalid character found in the map");
+		ft_putstr("Error\nNo coins found in the map");
 		errors = -1;
 	}
-	else if (chars[2] < 1)
+	if (chars[3] != 0)
 	{
-		ft_putstr("Error\nNo coins in the map");
+		ft_putstr("Error\nInvalid character found in the map");
 		errors = -1;
 	}
 	return (errors);

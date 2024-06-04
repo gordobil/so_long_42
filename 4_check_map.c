@@ -116,10 +116,11 @@ int	borders(int y, int x, char **map)
 	return (0);
 }
 
-int	map_check(char **map, int map_w)
+int	check_map(char **map)
 {
 	int	start_y;
 	int	start_x;
+	int	exit;
 
 	if (borders(0, 0, map) != 0)
 		return (-1);
@@ -129,13 +130,14 @@ int	map_check(char **map, int map_w)
 	start_x = start_coords(map, 'x');
 	if (start_y < 0 || start_x < 0)
 		return (-1);
-	if (find_exit(start_y, start_x, map) == 1)
+	exit = find_exit(start_y, start_x, map);
+	if (exit == 1)
 		ft_putstr("Error\nThere's no path to exit");
-	else if (find_exit(start_y, start_x, map) == 2)
+	else if (exit == 2)
 		ft_putstr("Error\nCan't collect all coins");
-	else if (find_exit(start_y, start_x, map) == 3)
+	else if (exit == 3)
 		ft_putstr("Error\nThere's no path to exit\nCan't collect all coins");
-	if (find_exit(start_y, start_x, map) != 0)
+	if (exit != 0)
 		return (-1);
 	return (0);
 }
