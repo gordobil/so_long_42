@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:50:10 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/05/20 14:58:18 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:08:55 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include "mlx/mlx.h"
 
 //START
 int			check_file(char *file);

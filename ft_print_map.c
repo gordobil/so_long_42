@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_map.c                                        :+:      :+:    :+:   */
+/*   ft_print_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:57:01 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/05/20 13:57:17 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:12:35 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,19 @@ void	ft_print_map_ascii(char **map)
 	int	x;
 	int	y;
 
-	printf("\n\nMAP IN ASCII:\n");
+	printf("MAP IN ASCII:\n");
 	y = 0;
 	while (map[y] != NULL)
 	{
 		x = 0;
+		printf("|");
 		while (map[y][x] != '\0')
 		{
 			printf ("%d ", map[y][x]);
 			x++;
 		}
-		printf ("%d/\n", map[y][x]);
+		printf ("/%d|\n", map[y][x]);
 		y++;
 	}
-	printf ("\n\n");
+	ft_putstr("");
 }
