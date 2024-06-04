@@ -27,12 +27,12 @@ char		**map_load(char *file, int w, int h);
 int			map_check(char **map, int map_w);
 int			characters_ret(int chars[4]);
 int			start_coords(char **map, char axis);
-int			find_exit(int y, int x, char **map, int coins);
+int			find_exit(int y, int x, char **map);
 
 //UTILS
 void		ft_putstr(char	*str);
 void		ft_print_map(char **map);
 void		ft_print_map_ascii(char **map);
-int			ft_remeassure(char **map, char axis);
+int			count(char **map, char axis);
 
 #endif

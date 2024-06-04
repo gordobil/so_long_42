@@ -25,11 +25,15 @@ void	so_long(char *file)
 	if (map_height <= 0)
 		return ;
 	map = map_load(file, map_width, map_height);
-	map_height = ft_remeassure(map, 'h');
+	ft_putstr("START:");
 	ft_print_map(map);
 	ft_putstr("");
+	map_height = count(map, 'h');
 	if (map_check(map, map_width) != 0)
 		return ;
+	ft_putstr("");
+	ft_putstr("");
+	ft_putstr("END:");
 	ft_print_map(map);
 }
 

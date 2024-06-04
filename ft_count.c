@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_remeassure.c                                    :+:      :+:    :+:   */
+/*   ft_count.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 13:43:22 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/03 14:27:53 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/04 12:39:29 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_remeassure(char **map, char axis)
+int	count(char **map, char axis)
 {
 	int	y;
 	int	x;

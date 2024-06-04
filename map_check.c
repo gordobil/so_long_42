@@ -129,13 +129,13 @@ int	map_check(char **map, int map_w)
 	start_x = start_coords(map, 'x');
 	if (start_y < 0 || start_x < 0)
 		return (-1);
-	if (find_exit(start_y, start_x, map, ft_remeassure(map, 'C')) == 1)
-	{
+	if (find_exit(start_y, start_x, map) == 1)
 		ft_putstr("Error\nThere's no path to exit");
-		return (-1);
-	}
-	else if (find_exit(start_y, start_x, map, ft_remeassure(map, 'C')) != 0 &&
-			find_exit(start_y, start_x, map, ft_remeassure(map, 'C')) != 1)
+	else if (find_exit(start_y, start_x, map) == 2)
+		ft_putstr("Error\nCan't collect all coins");
+	else if (find_exit(start_y, start_x, map) == 3)
+		ft_putstr("Error\nThere's no path to exit\nCan't collect all coins");
+	if (find_exit(start_y, start_x, map) != 0)
 		return (-1);
 	return (0);
 }
