@@ -18,7 +18,7 @@ int	meassure_return(char axis, int w, int h)
 	{
 		if (w < 3)
 		{
-			ft_putstr("Error\nMap width is too small.");
+			ft_putstr("Error\nMap width is too small");
 			return (0);
 		}
 		return (w);
@@ -27,7 +27,7 @@ int	meassure_return(char axis, int w, int h)
 	{
 		if (h < 3)
 		{
-			ft_putstr("Error\nMap height is too small.");
+			ft_putstr("Error\nMap height is too small");
 			return (0);
 		}
 		return (h);
@@ -97,7 +97,7 @@ int	check_file(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd <= 0)
 	{
-		ft_putstr("Error\nError opening file.");
+		ft_putstr("Error\nError opening file");
 		close (fd);
 		return (1);
 	}

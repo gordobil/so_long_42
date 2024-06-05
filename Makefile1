@@ -10,42 +10,39 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	so_long
-CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror
-MLX			=	mlx/Makefile.gen
-INC			=	-I mlx/
-LIB			=	mlx/ -lmlx -lXext -lX11 -lm -lbsd
-OBJ			=	$(patsubst src%, obj%, $(SRC:.c=.o))
-SRC			=	1_so_long.c 2_check_file.c 3_load_map.c 4_check_map.c \
-				5_check_map_aux.c ft_count.c ft_print_map.c ft_putstr.c \
+NAME = so_long
+mlx = mlx/libmlx.a
 
-all:		$(MLX) obj $(NAME)
+CC = gcc
+CCFLAGS = -Wall -Wextra -Werror
+mlxFLAGS = -I -g -L /usr/X11/lib -Lincludes -L./mlx -lmlx -Imlx -lXext -lX11 -lz -lm
+REMOVE = rm -f
+LIBRARY = ar rc
 
-$(NAME):	$(OBJ)
-			$(CC) $(FLAGS) -fsanitize=address -o $@ $^ $(LIB)
+SOURCES = 1_so_long.c 2_check_file.c 3_load_map.c 4_check_map.c \
+			5_check_map_aux.c ft_count.c ft_print_map.c ft_putstr.c \
 
-$(MLX):
-			@echo " [ .. ] | Compiling minilibx.."
-			@make -s -C mlx
-			@echo " [ OK ] | Minilibx ready!"
+OBJECTS = $(SOURCES:.c=.o)
 
-obj:
-			@mkdir -p obj
+INCLUDE = so_long.h
 
-obj/%.o:	src/%.c
-			$(CC) $(FLAGS) $(INC) -o $@ -c $<
+all: $(NAME)
+
+maker:
+	@make -C mlbx
+
+$(NAME): $(OBJECTS) $(INCLUDE)
+	$(LIBRARY) $(NAME) $(OBJECTS)
+
+$(OBJECTS): $(SOURCES)
+	$(CC) $(CCFLAGS) -c $(SOURCES)
 
 clean:
-			@make -s $@ -C 
-			@rm -rf $(OBJ) obj
-			@echo "object files removed."
+	$(REMOVE) $(OBJECTS)
 
-fclean:		clean
-			@make -s $@ -C 	
-			@rm -rf $(NAME)
-			@echo "binary file removed."
+fclean: clean
+	$(REMOVE) $(NAME)
+	@make clean -C mlx
 
-re:			fclean all
-
-.PHONY:		all clean fclean re
+re: fclean all
+.PHONY: all clean fclean re

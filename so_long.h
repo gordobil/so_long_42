@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
-# include "mlx/mlx.h"
+# include "./mlx/mlx.h"
 
 //START
 int			check_file(char *file);

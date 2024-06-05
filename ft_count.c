@@ -37,6 +37,5 @@ int	count(char **map, char axis)
 		return (x);
 	else if (axis == 'C')
 		return (c);
-	else
-		return (0);
+	return (0);
 }

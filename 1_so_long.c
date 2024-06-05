@@ -12,6 +12,16 @@
 
 #include "so_long.h"
 
+void	window(char **map, int w, int h)
+{
+	void	*mlx;
+
+	mlx = mlx_init();
+	mlx_new_window(mlx, w * 16, h * 16, "so_long");
+	mlx_loop(mlx);
+	ft_print_map(map);
+}
+
 void	so_long(char *file)
 {
 	char	**map;
@@ -19,23 +29,21 @@ void	so_long(char *file)
 	int		map_height;
 
 	map_width = meassure_map(file, 'w');
-	if (map_width <= 0)
-		return ;
 	map_height = meassure_map(file, 'h');
-	if (map_height <= 0)
+	if (map_width <= 0 || map_height <= 0)
 		return ;
 	map = load_map(file, map_width, map_height);
-	map_height = count(map, 'h');
 	if (check_map(map) != 0)
 		return ;
-	ft_putstr("MAP OK");
+	map_height = count(map, 'h');
+	window(load_map(file, map_width, map_height), map_width, map_height);
 }
 
 int	main(int argc, char **argv)
 {
 	if (argc != 2 || check_file(argv[1]) != 0)
 	{
-		ft_putstr("Error\nInvalid map.");
+		ft_putstr("Error\nInvalid map");
 		return (0);
 	}
 	so_long(argv[1]);
