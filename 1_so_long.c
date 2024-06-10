@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:50:00 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/10 14:24:36 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:54:36 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,26 @@ void	window(char **map, int w, int h)
 {
 	void	*mlx;
 	t_mlx	mlx_data;
+	int	x;
+	int	y;
 
 	mlx = mlx_init();
 	mlx_data.mlx_win = mlx_new_window(mlx, w * 400, h * 350, "so_long");
 	mlx_data.img = mlx_new_image(mlx, 100, 60);
 	mlx_data.addr = mlx_get_data_addr(mlx_data.img, &mlx_data.bits_per_pixel,
 									&mlx_data.line_length, &mlx_data.endian);
-	my_mlx_pixel_put(&mlx_data, 5, 5, 0x00FF0000);
-	mlx_put_image_to_window(mlx, mlx_data.mlx_win, mlx_data.img, 5, 6);
+	y = 20;
+	while (y <= 200)
+	{
+		x = 30;
+		while (x <= 100)
+		{
+			my_mlx_pixel_put(&mlx_data, y, x, 163059);
+			mlx_put_image_to_window(mlx, mlx_data.mlx_win, mlx_data.img, y, x);
+			x++;
+		}
+		y++;
+	}
 	mlx_loop(mlx);
 	ft_print_map(map);
 }
