@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:50:10 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/04 14:08:55 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:18:49 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include "./mlx/mlx.h"
+
+typedef struct  s_mlx
+{
+	void	*mlx_win;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}               t_mlx;
 
 //START
 int			check_file(char *file);
