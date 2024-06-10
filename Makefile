@@ -5,47 +5,70 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/27 13:03:33 by ngordobi          #+#    #+#              #
-#    Updated: 2024/06/04 13:45:40 by ngordobi         ###   ########.fr        #
+#    Created: 2024/06/10 11:52:23 by ngordobi          #+#    #+#              #
+#    Updated: 2024/06/10 13:24:49 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	so_long
+
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror
-MLX			=	mlx/Makefile.gen
-INC			=	-I mlx/
-LIB			=	mlx/ -lmlx -lXext -lX11 -lm -lbsd
-OBJ			=	$(patsubst src%, obj%, $(SRC:.c=.o))
-SRC			=	1_so_long.c 2_check_file.c 3_load_map.c 4_check_map.c \
-				5_check_map_aux.c ft_count.c ft_print_map.c ft_putstr.c \
+CC_FLAGS	=	-Wall -Wextra -Werror -g3 -MMD
 
-all:		$(MLX) obj $(NAME)
+SOURCES		=	1_so_long.c \
+				2_check_file.c \
+				3_load_map.c \
+				4_check_map.c \
+				5_check_map_aux.c \
+				ft_count.c \
+				ft_print_map.c \
+				ft_putstr.c \
 
-$(NAME):	$(OBJ)
-			$(CC) $(FLAGS) -fsanitize=address -o $@ $^ $(LIB)
+OBJECTS		=	$(SOURCES:%.c=%.o)
 
-$(MLX):
-			@echo " [ .. ] | Compiling minilibx.."
-			@make -s -C mlx
-			@echo " [ OK ] | Minilibx ready!"
+INCLUDE		=	so_long.h
 
-obj:
-			@mkdir -p obj
+MLX			=	./mlx/libmlx_Linux.a
+MLX_FLAGS	=	-L mlx/ -lmlx -lXext -lX11
 
-obj/%.o:	src/%.c
-			$(CC) $(FLAGS) $(INC) -o $@ -c $<
+
+
+define SO_LONG
+\033[0;31m
+
+
+
+  ██████  ▒█████         ██▓     ▒█████   ███▄    █   ▄████ 
+▒██    ▒ ▒██▒  ██▒      ▓██▒    ▒██▒  ██▒ ██ ▀█   █  ██▒ ▀█▒
+░ ▓██▄   ▒██░  ██▒      ▒██░    ▒██░  ██▒▓██  ▀█ ██▒▒██░▄▄▄░
+  ▒   ██▒▒██   ██░      ▒██░    ▒██   ██░▓██▒  ▐▌██▒░▓█  ██▓
+▒██████▒▒░ ████▓▒░      ░██████▒░ ████▓▒░▒██░   ▓██░░▒▓███▀▒
+▒ ▒▓▒ ▒ ░░ ▒░▒░▒░       ░ ▒░▓  ░░ ▒░▒░▒░ ░ ▒░   ▒ ▒  ░▒   ▒ 
+░ ░▒  ░ ░  ░ ▒ ▒░       ░ ░ ▒  ░  ░ ▒ ▒░ ░ ░░   ░ ▒░  ░   ░ 
+░  ░  ░  ░ ░ ░ ▒          ░ ░   ░ ░ ░ ▒     ░   ░ ░ ░ ░   ░ 
+      ░      ░ ░            ░  ░    ░ ░           ░       ░ 
+$(END)
+endef
+export SO_LONG
+
+.SILENT:
+
+all: 		$(NAME) 
+
+$(NAME):	$(OBJECTS) $(INCLUDE)
+			make -C ./mlx all
+			$(CC) $(CC_FLAGS) $(OBJECTS) -o $(NAME) $(MLX_FLAGS)
+			echo "\n· Compilation complete."
+			echo "$$SO_LONG"
 
 clean:
-			@make -s $@ -C 
-			@rm -rf $(OBJ) obj
-			@echo "object files removed."
+	rm -rf $(OBJECTS)
+	make -C ./mlx clean
+	echo "\n· Objects correctly removed."
 
-fclean:		clean
-			@make -s $@ -C 	
-			@rm -rf $(NAME)
-			@echo "binary file removed."
-
+fclean: clean
+	rm -rf $(NAME)
+	echo "· Executable correctly removed."
+		
 re:			fclean all
-
 .PHONY:		all clean fclean re
