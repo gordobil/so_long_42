@@ -6,45 +6,22 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:50:00 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/10 14:54:36 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/11 15:51:47 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
-{
-	char	*dst;
-	
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
 void	window(char **map, int w, int h)
 {
-	void	*mlx;
 	t_mlx	mlx_data;
 	int	x;
 	int	y;
+	int	b;
+	int	a;
 
-	mlx = mlx_init();
-	mlx_data.mlx_win = mlx_new_window(mlx, w * 400, h * 350, "so_long");
-	mlx_data.img = mlx_new_image(mlx, 100, 60);
-	mlx_data.addr = mlx_get_data_addr(mlx_data.img, &mlx_data.bits_per_pixel,
-									&mlx_data.line_length, &mlx_data.endian);
-	y = 20;
-	while (y <= 200)
-	{
-		x = 30;
-		while (x <= 100)
-		{
-			my_mlx_pixel_put(&mlx_data, y, x, 163059);
-			mlx_put_image_to_window(mlx, mlx_data.mlx_win, mlx_data.img, y, x);
-			x++;
-		}
-		y++;
-	}
-	mlx_loop(mlx);
+	window_init(&mlx_data, w, h);
+	mlx_loop(mlx_data.mlx);
 	ft_print_map(map);
 }
 
