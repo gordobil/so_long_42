@@ -15,12 +15,22 @@
 void    move_player(t_mlx *data, int move_y, int move_x)
 {
     if (data->map[data->y + move_y][data->x + move_x] == '0' ||
-        data->map[data->y + move_y][data->x + move_x] == 'C')
+        data->map[data->y + move_y][data->x + move_x] == 'C' ||
+        data->map[data->y + move_y][data->x + move_x] == 'X')
     {
         if (data->map[data->y + move_y][data->x + move_x] == 'C')
             data->coins--;
+        if (data->map[data->y + move_y][data->x + move_x] == 'X')
+        {
+            data->map[data->y][data->x] = 'E';
+            put_dock(data, data->x * 64, data->y *64);
+        }
+        else
+        {
+            data->map[data->y][data->x] = '0';
+            put_water(data, data->x * 64, data->y *64);
+        }
         data->map[data->y + move_y][data->x + move_x] = 'P';
-        data->map[data->y][data->x] = '0';
         if (move_x > 0)
             put_ship_r(data, (data->x + move_x) * 64, (data->y + move_y) * 64);
         else if (move_x < 0)
@@ -29,7 +39,6 @@ void    move_player(t_mlx *data, int move_y, int move_x)
             put_ship_u(data, (data->x + move_x) * 64, (data->y + move_y) * 64);
         else if (move_y > 0)
             put_ship_d(data, (data->x + move_x) * 64, (data->y + move_y) * 64);
-        put_water(data, data->x * 64, data->y *64);
         data->y += move_y;
         data->x += move_x;
         printf("MOVE %d\n", data->moves++);
@@ -50,6 +59,4 @@ void    move_player(t_mlx *data, int move_y, int move_x)
         data->y += move_y;
         data->x += move_x;
     }
-    else if (data->map[data->y + move_y][data->x + move_x] == 'X')
-    else
 }
