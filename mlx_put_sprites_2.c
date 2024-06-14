@@ -33,9 +33,16 @@ void    put_dock(t_mlx *data, int x, int y)
     mlx_put_image_to_window(data->mlx, data->mlx_win, data->dock, x, y);
 }
 
-void    put_docked(t_mlx *data, int x, int y)
+void    put_docked_r(t_mlx *data, int x, int y)
 {
-    data->addr = mlx_get_data_addr(data->docked, &data->bits_per_pixel,
+    data->addr = mlx_get_data_addr(data->docked_r, &data->bits_per_pixel,
 	 								&data->line_length, &data->endian);
-    mlx_put_image_to_window(data->mlx, data->mlx_win, data->docked, x, y);
+    mlx_put_image_to_window(data->mlx, data->mlx_win, data->docked_r, x, y);
+}
+
+void    put_docked_l(t_mlx *data, int x, int y)
+{
+    data->addr = mlx_get_data_addr(data->docked_l, &data->bits_per_pixel,
+	 								&data->line_length, &data->endian);
+    mlx_put_image_to_window(data->mlx, data->mlx_win, data->docked_l, x, y);
 }
