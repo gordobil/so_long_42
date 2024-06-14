@@ -6,7 +6,7 @@
 #    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:52:23 by ngordobi          #+#    #+#              #
-#    Updated: 2024/06/11 15:51:52 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/06/14 11:56:06 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SOURCES		=	1_so_long.c \
 				6_mlx.c \
 				mlx_put_sprites_1.c \
 				mlx_put_sprites_2.c \
+				mlx_put_map.c \
 				ft_count.c \
 				ft_print_map.c \
 				ft_putstr.c \
@@ -37,7 +38,7 @@ MLX_FLAGS	=	-L mlx/ -lmlx -lXext -lX11
 
 
 define SO_LONG
-\033[0;31m
+\033[0;33m
 
   ██████  ▒█████         ██▓     ▒█████   ███▄    █   ▄████ 
 ▒██    ▒ ▒██▒  ██▒      ▓██▒    ▒██▒  ██▒ ██ ▀█   █  ██▒ ▀█▒

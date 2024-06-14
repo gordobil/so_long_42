@@ -6,23 +6,22 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:50:00 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/11 15:51:47 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/14 14:04:23 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	window(char **map, int w, int h)
+void	window(char *file, int w, int h)
 {
-	t_mlx	mlx_data;
-	int	x;
-	int	y;
-	int	b;
-	int	a;
-
-	window_init(&mlx_data, w, h);
-	mlx_loop(mlx_data.mlx);
-	ft_print_map(map);
+	t_mlx	data;
+	int		y;
+	int		x;
+	
+	data.map = load_map(file, w, h);
+	window_init(&data, w, h);
+	put_map(data.map, data);
+	mlx_loop(data.mlx);
 }
 
 void	so_long(char *file)
@@ -37,9 +36,12 @@ void	so_long(char *file)
 		return ;
 	map = load_map(file, map_width, map_height);
 	if (check_map(map) != 0)
+	{
+		ft_free_map(map);
 		return ;
+	}
 	map_height = count(map, 'h');
-	window(load_map(file, map_width, map_height), map_width, map_height);
+	window(file, map_width, map_height);
 }
 
 int	main(int argc, char **argv)
