@@ -62,4 +62,15 @@ void    move_player(t_mlx *data, int move_y, int move_x)
         data->y += move_y;
         data->x += move_x;
     }
+    else
+    {
+        if (move_x > 0)
+            put_ship_r(data, data->x * 64, data->y * 64);
+        else if (move_x < 0)
+            put_ship_l(data, data->x * 64, data->y * 64);
+        else if (move_y < 0)
+            put_ship_u(data, data->x * 64, data->y * 64);
+        else if (move_y > 0)
+            put_ship_d(data, data->x * 64, data->y * 64);
+    }
 }
