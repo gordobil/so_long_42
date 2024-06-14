@@ -6,13 +6,13 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:17:42 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/14 14:29:58 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/14 14:31:21 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void    key_assignment(t_mlx *data, int key)
+void    pressed_key(t_mlx *data, int key)
 {
     if (key == Q || key == ESC)
         close_window(data);
@@ -55,6 +55,6 @@ void    window_init(t_mlx *data, int w, int h)
     data->mlx = mlx_init();
     data->mlx_win = mlx_new_window(data->mlx, w * SQ, h * SQ, "so_long");
 	mlx_hook(data->mlx_win, 17, 1, close_window, data);
-	mlx_hook(data->mlx_win, 2, 1, key_assignment, data);
+	mlx_hook(data->mlx_win, 2, 1, pressed_key, data);
     data = load_sprites(data);
 }
