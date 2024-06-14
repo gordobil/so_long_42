@@ -47,9 +47,12 @@ void    move_player(t_mlx *data, int move_y, int move_x)
     {
         data->map[data->y + move_y][data->x + move_x] = 'X';
         data->map[data->y][data->x] = '0';
-        put_docked(data, (data->x + move_x) * 64, (data->y + move_y) * 64);
+        if (move_x < 0)
+       		put_docked_l(data, (data->x + move_x) * 64, (data->y + move_y) * 64);
+        else
+            put_docked_r(data, (data->x + move_x) * 64, (data->y + move_y) * 64);
         put_water(data, data->x * 64, data->y *64);
-        printf("MOVE %d\n", data->moves++);
+        printf("YOU MOVED %d TIMES\n", data->moves++);
         if (data->coins == 0)
         {
             close_window(data);
