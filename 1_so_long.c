@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:50:00 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/14 14:04:23 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/17 14:51:38 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,18 @@
 void	window(char *file, int w, int h)
 {
 	t_mlx	data;
-	int		y;
-	int		x;
-	
+
 	data.map = load_map(file, w, h);
-	window_init(&data, w, h);
-	put_map(data.map, data);
+	data.y = start_coords(data.map, 'y');
+	data.x = start_coords(data.map, 'x');
+	data.coins = count(data.map, 'C');
+	data.moves = 0;
+	data.mlx = mlx_init();
+	data.mlx_win = mlx_new_window(data.mlx, w * SQ, h * SQ, "so_long");
+	put_map(&data);
+	pressed_key(&data, W);
+	mlx_hook(&data.mlx_win, 2, 1L << 0, pressed_key, &data);
+	mlx_hook(data.mlx_win, 17, 1, close_window, &data);
 	mlx_loop(data.mlx);
 }
 

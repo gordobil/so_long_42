@@ -57,10 +57,11 @@
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
-    "so_long.h": "c",
-    "unistd.h": "c",
-    "so_long": "c",
-    "mlx.h": "c",
-    "mlx_int.h": "c"
-  }
+	"so_long.h": "c",
+	"unistd.h": "c",
+	"so_long": "c",
+	"mlx.h": "c",
+	"mlx_int.h": "c",
+	"stdio.h": "c"
+}
 }

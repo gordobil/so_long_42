@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:50:10 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/14 14:29:57 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/17 14:51:40 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "./mlx/mlx.h"
 # define SQ 64
 # define Q 12
-# define W 13
+# define W 119
 # define A 0
 # define S 1
 # define D 2
@@ -40,7 +40,7 @@
 # define DOCKED_R "./sprites/C.xpm"
 # define DOCKED_L "./sprites/C.xpm"
 
-typedef struct  s_mlx
+typedef struct s_mlx
 {
 	char		**map;
 	int			y;
@@ -63,7 +63,7 @@ typedef struct  s_mlx
 	void		*dock;
 	void		*docked_r;
 	void		*docked_l;
-}               t_mlx;
+}				t_mlx;
 
 //START
 int			check_file(char *file);
@@ -78,25 +78,25 @@ int			find_exit(int y, int x, char **map);
 
 //UTILS
 void		ft_putstr(char	*str);
-void    	ft_free_map(char **data);
+void		ft_free_map(char **data);
 void		ft_print_map(char **map);
 void		ft_print_map_ascii(char **map);
 int			count(char **map, char axis);
 
 //MLX
-void		window_init(t_mlx *data, int w, int h);
-int	    	close_window(t_mlx *data);
-void    	put_ship_u(t_mlx *data, int x, int y);
-void    	put_ship_d(t_mlx *data, int x, int y);
-void    	put_ship_l(t_mlx *data, int x, int y);
-void    	put_ship_r(t_mlx *data, int x, int y);
-void    	put_water(t_mlx *data, int x, int y);
-void    	put_cliff(t_mlx *data, int x, int y);
-void    	put_buoy(t_mlx *data, int x, int y);
+int			close_window(t_mlx *data);
+t_mlx		*load_sprites(t_mlx *data);
+int			pressed_key(t_mlx *data, int key);
+void		put_ship_u(t_mlx *data, int x, int y);
+void		put_ship_d(t_mlx *data, int x, int y);
+void		put_ship_l(t_mlx *data, int x, int y);
+void		put_ship_r(t_mlx *data, int x, int y);
+void		put_water(t_mlx *data, int x, int y);
+void		put_cliff(t_mlx *data, int x, int y);
+void		put_buoy(t_mlx *data, int x, int y);
 void		put_dock(t_mlx *data, int x, int y);
-void    	put_docked_r(t_mlx *data, int x, int y);
-void    	put_docked_l(t_mlx *data, int x, int y);
-void		put_map(char **map, t_mlx data);
-void    	move_player(t_mlx *data, int move_y, int move_x);
+void		put_docked_r(t_mlx *data, int x, int y);
+void		put_docked_l(t_mlx *data, int x, int y);
+void		put_map(t_mlx *data);
 
 #endif

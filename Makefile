@@ -6,7 +6,7 @@
 #    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:52:23 by ngordobi          #+#    #+#              #
-#    Updated: 2024/06/14 11:56:06 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/06/17 14:51:41 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ SOURCES		=	1_so_long.c \
 				3_load_map.c \
 				4_check_map.c \
 				5_check_map_aux.c \
-				6_mlx.c \
-				7_mlx_move.c \
+				6_mlx_move.c \
+				mlx_load_sprites.c \
 				mlx_put_sprites_1.c \
 				mlx_put_sprites_2.c \
 				mlx_put_map.c \
@@ -70,6 +70,7 @@ $(NAME):	$(OBJECTS) $(INCLUDE)
 
 clean:
 	rm -rf ./objects/
+	rm -rf ./*.o
 	make -C ./mlx clean
 	echo "\n·······························"
 	echo "\n· Objects correctly removed."
