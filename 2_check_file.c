@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 10:56:14 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/04 13:55:05 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:10:03 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	meassure_return(char axis, int w, int h)
 	{
 		if (w < 3)
 		{
-			ft_putstr("Error\nMap width is too small");
+			ft_printf("Error\nMap width is too small\n");
 			return (0);
 		}
 		return (w);
@@ -27,7 +27,7 @@ int	meassure_return(char axis, int w, int h)
 	{
 		if (h < 3)
 		{
-			ft_putstr("Error\nMap height is too small");
+			ft_printf("Error\nMap height is too small\n");
 			return (0);
 		}
 		return (h);
@@ -97,7 +97,7 @@ int	check_file(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd <= 0)
 	{
-		ft_putstr("Error\nError opening file");
+		ft_printf("Error\nError opening file\n");
 		close (fd);
 		return (1);
 	}

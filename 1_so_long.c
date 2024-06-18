@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:50:00 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/17 14:51:38 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:15:19 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char **argv)
 {
 	if (argc != 2 || check_file(argv[1]) != 0)
 	{
-		ft_putstr("Error\nInvalid map");
+		ft_printf("Error\nInvalid map\n");
 		return (0);
 	}
 	so_long(argv[1]);

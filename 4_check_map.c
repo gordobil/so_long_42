@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 20:09:59 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/04 13:57:20 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:11:27 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	characters_aux(int chars[4], int letter)
 			return (1);
 		else
 		{
-			ft_putstr("Error\nToo many characters in the map");
+			ft_printf("Error\nToo many characters in the map\n");
 			return (-1);
 		}
 	}
@@ -30,7 +30,7 @@ int	characters_aux(int chars[4], int letter)
 			return (1);
 		else
 		{
-			ft_putstr("Error\nToo many exits in the map");
+			ft_printf("Error\nToo many exits in the map\n");
 			return (-1);
 		}
 	}
@@ -110,7 +110,7 @@ int	borders(int y, int x, char **map)
 	}
 	if (map[y] != NULL)
 	{
-		ft_putstr("Error\nError in map borders");
+		ft_printf("Error\nError in map borders\n");
 		return (-1);
 	}
 	return (0);
@@ -132,11 +132,11 @@ int	check_map(char **map)
 		return (-1);
 	exit = find_exit(start_y, start_x, map);
 	if (exit == 1)
-		ft_putstr("Error\nThere's no path to exit");
+		ft_printf("Error\nThere's no path to exit\n");
 	else if (exit == 2)
-		ft_putstr("Error\nCan't collect all coins");
+		ft_printf("Error\nCan't collect all coins\n");
 	else if (exit == 3)
-		ft_putstr("Error\nThere's no path to exit\nCan't collect all coins");
+		ft_printf("Error\nThere's no path to exit\nCan't collect all coins\n");
 	if (exit != 0)
 		return (-1);
 	return (0);

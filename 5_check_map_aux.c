@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:41:47 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/04 14:05:55 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:12:01 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ int	characters_ret(int chars[4])
 	errors = 0;
 	if (chars[0] != 1)
 	{
-		ft_putstr("Error\nInvalid number of players in the map");
+		ft_printf("Error\nInvalid number of players in the map\n");
 		errors = -1;
 	}
 	if (chars[1] != 1)
 	{
-		ft_putstr("Error\nInvalid number of exits in the map");
+		ft_printf("Error\nInvalid number of exits in the map\n");
 		errors = -1;
 	}
 	if (chars[2] < 1)
 	{
-		ft_putstr("Error\nNo coins found in the map");
+		ft_printf("Error\nNo coins found in the map\n");
 		errors = -1;
 	}
 	if (chars[3] != 0)
 	{
-		ft_putstr("Error\nInvalid character found in the map");
+		ft_printf("Error\nInvalid character found in the map\n");
 		errors = -1;
 	}
 	return (errors);

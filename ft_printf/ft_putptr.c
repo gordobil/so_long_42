@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_putptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/14 12:09:28 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/04 14:01:28 by ngordobi         ###   ########.fr       */
+/*   Created: 2024/02/12 12:11:17 by ngordobi          #+#    #+#             */
+/*   Updated: 2024/06/18 14:41:29 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
-void	ft_putstr(char	*str)
+int	ft_putptr(unsigned long p, int count)
 {
-	int	i;
-
-	if (!str)
-		return ;
-	i = 0;
-	while (str[i] != '\0')
-	{
-		write (1, &str[i], 1);
-		i++;
-	}
-	write (1, "\n", 1);
+	count = ft_putstr("0x", count);
+	if (p == 0)
+		count = ft_putchar('0', count);
+	else
+		count = ft_puthex(p, count, 'x');
+	return (count);
 }

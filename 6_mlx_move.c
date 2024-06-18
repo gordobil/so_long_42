@@ -6,24 +6,47 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:17:42 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/17 14:42:16 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:12:36 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	dont_move(t_mlx *data, int move_y, int move_x)
+{
+	if (data->map[data->y][data->x] == 'X' ||
+		data->map[data->y][data->x] == 'Y')
+	{
+		if (move_x < 0 || move_y < 0)
+			data->map[data->y][data->x] = 'X';
+		else if (move_x > 0 || move_y > 0)
+			data->map[data->y][data->x] = 'Y';
+	}
+	else
+	{
+		if (move_x > 0)
+			data->map[data->y][data->x] = 'R';
+		else if (move_x < 0)
+			data->map[data->y][data->x] = 'L';
+		else if (move_y < 0)
+			data->map[data->y][data->x] = 'U';
+		else if (move_y > 0)
+			data->map[data->y][data->x] = 'D';
+	}
+}
+
 void	move_to_e(t_mlx *data, int move_y, int move_x)
 {
-	if (move_x < 0)
+	if (move_x < 0 || move_y < 0)
 		data->map[data->y + move_y][data->x + move_x] = 'Y';
-	else
+	else if (move_x > 0 || move_y > 0)
 		data->map[data->y + move_y][data->x + move_x] = 'X';
 	data->map[data->y][data->x] = '0';
-	printf ("You moved %d time(s).\n", ++data->moves);
+	ft_printf ("You moved %d time(s).\n", ++data->moves);
 	if (data->coins == 0)
 	{
 		close_window (data);
-		printf ("You won !!\n");
+		ft_printf ("You won !!\n");
 		return ;
 	}
 	data->y += move_y;
@@ -34,7 +57,7 @@ void	move_to_e(t_mlx *data, int move_y, int move_x)
 void	move_to_c_0(t_mlx *data, int move_y, int move_x)
 {
 	if (data->map[data->y + move_y][data->x + move_x] == 'C')
-		printf ("There are %d buoys left.\n", --data->coins);
+		ft_printf ("There are %d buoys left.\n", --data->coins);
 	if (data->map[data->y][data->x] == 'X' ||
 		data->map[data->y][data->x] == 'Y')
 		data->map[data->y][data->x] = 'E';
@@ -51,7 +74,7 @@ void	move_to_c_0(t_mlx *data, int move_y, int move_x)
 	data->y += move_y;
 	data->x += move_x;
 	put_map(data);
-	printf("You moved %d time(s).\n", ++data->moves);
+	ft_printf("You moved %d time(s).\n", ++data->moves);
 }
 
 void	move_player(t_mlx *data, int move_y, int move_x)
@@ -62,16 +85,7 @@ void	move_player(t_mlx *data, int move_y, int move_x)
 	else if (data->map[data->y + move_y][data->x + move_x] == 'E')
 		move_to_e(data, move_y, move_x);
 	else
-	{
-		if (move_x > 0)
-			data->map[data->y][data->x] = 'R';
-		else if (move_x < 0)
-			data->map[data->y][data->x] = 'L';
-		else if (move_y < 0)
-			data->map[data->y][data->x] = 'U';
-		else if (move_y > 0)
-			data->map[data->y][data->x] = 'D';
-	}
+		dont_move(data, move_y, move_x);
 	put_map(data);
 }
 

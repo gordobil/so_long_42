@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:57:01 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/04 14:12:35 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:49:26 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	print_title(int x, int m)
 		write (1, "~", 1);
 		x--;
 	}
-	ft_putstr("");
+	ft_printf("\n");
 }
 
 void	ft_print_map(char **map)
@@ -40,7 +40,7 @@ void	ft_print_map(char **map)
 	y = 0;
 	while (map[y] != NULL)
 	{
-		ft_putstr(map[y]);
+		ft_printf("%s\n", map[y]);
 		y++;
 	}
 	y = 0;
@@ -49,7 +49,7 @@ void	ft_print_map(char **map)
 		write (1, "~", 1);
 		y++;
 	}
-	ft_putstr("");
+	ft_printf("\n");
 }
 
 void	ft_print_map_ascii(char **map)
@@ -57,19 +57,19 @@ void	ft_print_map_ascii(char **map)
 	int	x;
 	int	y;
 
-	printf("MAP IN ASCII:\n");
+	ft_printf("MAP IN ASCII:\n");
 	y = 0;
 	while (map[y] != NULL)
 	{
 		x = 0;
-		printf("|");
+		ft_printf("|");
 		while (map[y][x] != '\0')
 		{
-			printf ("%d ", map[y][x]);
+			ft_printf ("%d ", map[y][x]);
 			x++;
 		}
-		printf ("/%d|\n", map[y][x]);
+		ft_printf ("/%d|\n", map[y][x]);
 		y++;
 	}
-	ft_putstr("");
+	ft_printf("\n");
 }

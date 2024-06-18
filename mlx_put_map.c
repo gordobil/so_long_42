@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:24:45 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/17 12:37:33 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:50:51 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,23 @@
 void	put_var(t_mlx *data, int y, int x)
 {
 	if (data->map[y][x] == 'X')
-		put_docked_r(data, x * 64, y * 64);
+		mlx_put_image_to_window(data->mlx, data->mlx_win, data->docked_r,
+			x * 64, y * 64);
 	else if (data->map[y][x] == 'Y')
-		put_docked_l(data, x * 64, y * 64);
+		mlx_put_image_to_window(data->mlx, data->mlx_win, data->docked_l,
+			x * 64, y * 64);
 	else if (data->map[y][x] == 'P' || data->map[y][x] == 'R')
-		put_ship_r(data, x * 64, y * 64);
+		mlx_put_image_to_window(data->mlx, data->mlx_win, data->ship_r,
+			x * 64, y * 64);
 	else if (data->map[y][x] == 'L')
-		put_ship_l(data, x * 64, y * 64);
+		mlx_put_image_to_window(data->mlx, data->mlx_win, data->ship_l,
+			x * 64, y * 64);
 	else if (data->map[y][x] == 'U')
-		put_ship_u(data, x * 64, y * 64);
+		mlx_put_image_to_window(data->mlx, data->mlx_win, data->ship_u,
+			x * 64, y * 64);
 	else if (data->map[y][x] == 'D')
-		put_ship_d(data, x * 64, y * 64);
+		mlx_put_image_to_window(data->mlx, data->mlx_win, data->ship_d,
+			x * 64, y * 64);
 }
 
 void	put_map(t_mlx *data)
