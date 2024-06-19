@@ -6,11 +6,11 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:07:18 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/18 14:41:03 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/19 11:05:20 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../../so_long.h"
 
 int	format(va_list list, const char *arg, int count)
 {

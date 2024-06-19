@@ -6,11 +6,11 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:57:01 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/18 14:49:26 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/19 11:05:06 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 void	print_title(int x, int m)
 {

@@ -6,11 +6,11 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:50:55 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/18 14:50:59 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/19 11:07:10 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 void	put_water(t_mlx *data, int x, int y)
 {

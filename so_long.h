@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:50:10 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/18 14:51:23 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/19 14:48:43 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,21 @@
 # define U_ARROW 126
 # define D_ARROW 125
 # define SHIP_L "./sprites/ship_l.xpm"
+# define SHIP_L_2 "./sprites/bonus/ship_l_2.xpm"
 # define SHIP_R "./sprites/ship_r.xpm"
+# define SHIP_R_2 "./sprites/bonus/ship_r_2.xpm"
 # define SHIP_U "./sprites/ship_u.xpm"
+# define SHIP_U_2 "./sprites/bonus/ship_l_2.xpm"
 # define SHIP_D "./sprites/ship_d.xpm"
+# define SHIP_D_2 "./sprites/bonus/ship_r_2.xpm"
 # define WATER "./sprites/water.xpm"
 # define CLIFF "./sprites/cliff.xpm"
 # define BUOY "./sprites/buoy.xpm"
 # define DOCK "./sprites/E.xpm"
 # define DOCKED_R "./sprites/C.xpm"
 # define DOCKED_L "./sprites/1.xpm"
+# define PIRATE "./sprites/bonus/pirate.xpm"
+# define PIRATE_2 "./sprites/bonus/pirate_2.xpm"
 
 typedef struct s_mlx
 {
@@ -48,6 +54,7 @@ typedef struct s_mlx
 	int			x;
 	int			coins;
 	int			moves;
+	int			animation;
 	void		*mlx;
 	void		*mlx_win;
 	char		*addr;
@@ -55,15 +62,21 @@ typedef struct s_mlx
 	int			line_length;
 	int			endian;
 	void		*ship_u;
+	void		*ship_u_2;
 	void		*ship_d;
+	void		*ship_d_2;
 	void		*ship_l;
+	void		*ship_l_2;
 	void		*ship_r;
+	void		*ship_r_2;
 	void		*water;
 	void		*cliff;
 	void		*buoy;
 	void		*dock;
 	void		*docked_r;
 	void		*docked_l;
+	void		*pirate;
+	void		*pirate_2;
 }				t_mlx;
 
 //START
@@ -73,6 +86,7 @@ char		**load_map(char *file, int w, int h);
 
 //CHECK
 int			check_map(char **map);
+int			borders(int y, int x, char **map);
 int			characters_ret(int chars[4]);
 int			start_coords(char **map, char axis);
 int			find_exit(int y, int x, char **map);
@@ -81,7 +95,9 @@ int			find_exit(int y, int x, char **map);
 void		ft_free_map(char **data);
 void		ft_print_map(char **map);
 void		ft_print_map_ascii(char **map);
+int			start_coords(char **map, char axis);
 int			count(char **map, char axis);
+char		*ft_itoa(int n);
 
 //MLX UTILS
 int			close_window(t_mlx *data);
@@ -101,5 +117,14 @@ int			ft_putnbr(int n, int count);
 int			ft_putunbr(unsigned int n, int count);
 int			ft_puthex(unsigned long n, int count, char arg_format);
 int			ft_putptr(unsigned long p, int count);
+
+//BONUS
+int			check_file_bonus(char *file);
+int			meassure_map_bonus(char *file, char axis);
+char		**load_map_bonus(char *file, int w, int h);
+int			check_map_bonus(char **map);
+int			find_exit_bonus(int y, int x, char **map);
+int			pressed_key_bonus(t_mlx *data, int key);
+void		put_map_bonus(t_mlx *data);
 
 #endif

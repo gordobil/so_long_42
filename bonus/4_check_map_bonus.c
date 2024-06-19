@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   4_check_map.c                                      :+:      :+:    :+:   */
+/*   4_check_map_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 20:09:59 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/19 14:48:41 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/19 13:40:50 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
-int	characters_aux(int chars[4], int letter)
+int	characters_aux_bonus(int chars[4], int letter)
 {
 	if (letter == 0)
 	{
@@ -37,7 +37,7 @@ int	characters_aux(int chars[4], int letter)
 	return (0);
 }
 
-int	characters(int y, int x, char **map)
+int	characters_bonus(int y, int x, char **map)
 {
 	int	i;
 	int	chars[4];
@@ -46,27 +46,27 @@ int	characters(int y, int x, char **map)
 	while (i < 4)
 		chars[i++] = 0;
 	y = 1;
-	while (map[y] != NULL)
+	while (map[y++] != NULL)
 	{
 		x = 0;
 		while (map[y][x++] != '\0')
 		{
 			if (map[y][x] == 'P')
-				chars[0] = characters_aux(chars, 0);
+				chars[0] = characters_aux_bonus(chars, 0);
 			else if (map[y][x] == 'E')
-				chars[1] = characters_aux(chars, 1);
+				chars[1] = characters_aux_bonus(chars, 1);
 			else if (map[y][x] == 'C')
 				chars[2]++;
 			else if (map[y][x] != '0' && map[y][x] != '1' && map[y][x] != 'P' &&
-					map[y][x] != 'E' && map[y][x] != 'C' && map[y][x] != '\0')
+					map[y][x] != 'E' && map[y][x] != 'C' && map[y][x] != 'B' &&
+					map[y][x] != '\0')
 				chars[3] = -1;
 		}
-		y++;
 	}
 	return (characters_ret(chars));
 }
 
-int	check_map(char **map)
+int	check_map_bonus(char **map)
 {
 	int	start_y;
 	int	start_x;
@@ -74,13 +74,13 @@ int	check_map(char **map)
 
 	if (borders(0, 0, map) != 0)
 		return (-1);
-	if (characters(1, 1, map) != 0)
+	if (characters_bonus(1, 1, map) != 0)
 		return (-1);
 	start_y = start_coords(map, 'y');
 	start_x = start_coords(map, 'x');
 	if (start_y < 0 || start_x < 0)
 		return (-1);
-	exit = find_exit(start_y, start_x, map);
+	exit = find_exit_bonus(start_y, start_x, map);
 	if (exit == 1)
 		ft_printf("Error\nThere's no path to exit\n");
 	else if (exit == 2)

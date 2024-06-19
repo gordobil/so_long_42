@@ -6,11 +6,11 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:24:45 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/18 14:50:51 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/19 11:07:06 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 void	put_var(t_mlx *data, int y, int x)
 {

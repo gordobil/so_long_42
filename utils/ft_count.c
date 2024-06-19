@@ -1,23 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putptr.c                                        :+:      :+:    :+:   */
+/*   ft_count.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 12:11:17 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/18 14:41:29 by ngordobi         ###   ########.fr       */
+/*   Created: 2024/06/03 13:43:22 by ngordobi          #+#    #+#             */
+/*   Updated: 2024/06/19 11:04:27 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	ft_putptr(unsigned long p, int count)
+int	count(char **map, char axis)
 {
-	count = ft_putstr("0x", count);
-	if (p == 0)
-		count = ft_putchar('0', count);
-	else
-		count = ft_puthex(p, count, 'x');
-	return (count);
+	int	y;
+	int	x;
+	int	c;
+
+	y = 0;
+	c = 0;
+	while (map[y] != NULL)
+	{
+		x = 0;
+		while (map[y][x] != '\0')
+		{
+			if (map[y][x] == 'C')
+				c++;
+			x++;
+		}
+		y++;
+	}
+	if (axis == 'h')
+		return (y);
+	else if (axis == 'w')
+		return (x);
+	else if (axis == 'C')
+		return (c);
+	return (0);
 }

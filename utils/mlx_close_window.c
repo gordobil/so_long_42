@@ -6,11 +6,11 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:27:51 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/18 14:50:37 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/19 11:07:01 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 int	close_window(t_mlx *data)
 {
