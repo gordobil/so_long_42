@@ -11,14 +11,15 @@
 # **************************************************************************** #
 
 NAME				=	so_long
-NAME_BONUS			=	so_long_bonus
 
 CC					=	gcc
 CC_FLAGS			=	-Wall -Wextra -Werror -g3 -MMD
 
 UTILS				=	./utils/
 FT_PRINTF			=	./utils/ft_printf/
-BONUS				=	./bonus/
+
+MLX					=	./mlx/libmlx_Linux.a
+MLX_FLAGS			=	-L mlx/ -lmlx -lXext -lX11
 
 SOURCES				=	1_so_long.c \
 						2_check_file.c \
@@ -26,13 +27,6 @@ SOURCES				=	1_so_long.c \
 						4_check_map.c \
 						5_find_exit.c \
 						6_mlx_move.c \
-
-SOURCES_BONUS		=	$(BONUS)1_so_long_bonus.c \
-						$(BONUS)2_check_file_bonus.c \
-						$(BONUS)3_load_map_bonus.c \
-						$(BONUS)4_check_map_bonus.c \
-						$(BONUS)5_find_exit_bonus.c \
-						$(BONUS)6_mlx_move_bonus.c \
 
 SOURCES_UT			=	$(UTILS)ft_count.c \
 						$(UTILS)ft_print_map.c \
@@ -56,14 +50,10 @@ SOURCES_PF			=	$(FT_PRINTF)ft_printf.c \
 						$(FT_PRINTF)ft_putptr.c \
 
 OBJECTS				=	$(SOURCES:%.c=%.o)
-OBJECTS_BONUS		=	$(SOURCES_BONUS:%.c=%.o)
 OBJECTS_UT			=	$(SOURCES_UT:%.c=%.o)
 OBJECTS_PF			=	$(SOURCES_PF:%.c=%.o)
 
 INCLUDE				=	so_long.h
-
-MLX					=	./mlx/libmlx_Linux.a
-MLX_FLAGS			=	-L mlx/ -lmlx -lXext -lX11
 
 define SO_LONG
 \033[0;33m
@@ -82,36 +72,11 @@ $(END)
 endef
 export SO_LONG
 
-define SO_LONG_BONUS
-\033[0;33m
-
-  ██████  ▒█████      ██▓     ▒█████   ███▄    █   ▄████ 
-▒██    ▒ ▒██▒  ██▒   ▓██▒    ▒██▒  ██▒ ██ ▀█   █  ██▒ ▀█▒
-░ ▓██▄   ▒██░  ██▒   ▒██░    ▒██░  ██▒▓██  ▀█ ██▒▒██░▄▄▄░
-  ▒   ██▒▒██   ██░   ▒██░    ▒██   ██░▓██▒  ▐▌██▒░▓█  ██▓
-▒██████▒▒░ ████▓▒░   ░██████▒░ ████▓▒░▒██░   ▓██░░▒▓███▀▒
-▒ ▒▓▒ ▒ ░░ ▒░▒░▒░    ░ ▒░▓  ░░ ▒░▒░▒░ ░ ▒░   ▒ ▒  ░▒   ▒ 
-░ ░▒  ░ ░  ░ ▒ ▒░    ░ ░ ▒  ░  ░ ▒ ▒░ ░ ░░   ░ ▒░  ░   ░ 
-░  ░  ░  ░ ░ ░ ▒       ░ ░   ░ ░ ░ ▒     ░   ░ ░ ░ ░   ░ 
-      ░▄▄▄▄  ░ ▒█████   ███▄░   █░ █    ██   ██████    ░ 
-      ▓█████▄ ▒██▒  ██▒ ██ ▀█   █  ██  ▓██▒▒██    ▒      
-      ▒██▒ ▄██▒██░  ██▒▓██  ▀█ ██▒▓██  ▒██░░ ▓██▄        
-      ▒██░█▀  ▒██   ██░▓██▒  ▐▌██▒▓▓█  ░██░  ▒   ██▒     
-      ░▓█  ▀█▓░ ████▓▒░▒██░   ▓██░▒▒█████▓ ▒██████▒▒     
-      ░▒▓███▀▒░ ▒░▒░▒░ ░ ▒░   ▒ ▒ ░▒▓▒ ▒ ▒ ▒ ▒▓▒ ▒ ░     
-      ▒░▒   ░   ░ ▒ ▒░ ░ ░░   ░ ▒░░░▒░ ░ ░ ░ ░▒  ░ ░     
-       ░    ░ ░ ░ ░ ▒     ░   ░ ░  ░░░ ░ ░ ░  ░  ░       
-       ░          ░ ░           ░    ░           ░       
-            ░                                            
-
-$(END)
-endef
-export SO_LONG_BONUS
-
 .SILENT:
 
 all: 			$(NAME)
-bonus:			$(NAME_BONUS)
+
+bonus:			make -C ./bonus all
 
 $(NAME):		$(OBJECTS) $(OBJECTS_UT) $(OBJECTS_PF) $(INCLUDE)
 				make -C ./mlx all
@@ -125,18 +90,6 @@ $(NAME):		$(OBJECTS) $(OBJECTS_UT) $(OBJECTS_PF) $(INCLUDE)
 				echo "\n\n··················· Compilation complete ···················"
 				echo "$$SO_LONG"
 
-$(NAME_BONUS):	$(OBJECTS_BONUS) $(OBJECTS_UT) $(OBJECTS_PF) $(INCLUDE)
-				make -C ./mlx all
-				$(CC) $(CC_FLAGS) $(OBJECTS_BONUS) $(OBJECTS_UT) $(OBJECTS_PF) -o $(NAME) $(MLX_FLAGS)
-				mkdir ./objects/
-				mkdir ./utils/objects/
-				mkdir ./utils/ft_printf/objects/
-				mv $(OBJECTS_BONUS) ./objects/
-				mv $(OBJECTS_UT) ./utils/objects/
-				mv $(OBJECTS_PF) ./utils/ft_printf/objects/
-				echo "\n\n··············· Bonus compilation complete ···············"
-				echo "$$SO_LONG_BONUS"
-
 clean:
 				rm -rf ./objects/
 				rm -rf ./*.o
@@ -147,11 +100,12 @@ clean:
 				rm -rf ./utils/ft_printf/objects/
 				rm -rf ./utils/ft_printf/*.o
 				make -C ./mlx clean
+				make -C ./bonus fclean
 				echo "\n·······························"
 				echo "\n· Objects correctly removed."
 
 fclean:			clean
-				rm -rf $(NAME) $(NAME_BONUS)
+				rm -rf $(NAME)
 				echo "· Executable correctly removed."
 
 nl:
