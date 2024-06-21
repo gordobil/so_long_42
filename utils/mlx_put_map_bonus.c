@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:24:45 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/19 13:28:57 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/21 13:39:52 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	put_pirates_dock(t_mlx *data, int y, int x)
 			x * 64, y * 64);
 }
 
-void	put_ships(t_mlx *data, int y, int x)
+void	put_ships_bonus(t_mlx *data, int y, int x)
 {
 	if ((data->map[y][x] == 'P' || data->map[y][x] == 'R') &&
 		(data->animation % 2 != 0))
@@ -66,12 +66,12 @@ void	put_map_bonus(t_mlx *data)
 	int	x;
 
 	load_sprites(data);
-	y = 0;
-	while (data->map[y++] != NULL)
+	y = -1;
+	while (data->map[++y] != NULL)
 	{
-		x = 0;
+		x = -1;
 		put_cliff(data, 1, y * 64);
-		while (data->map[y][x++] != '\0')
+		while (data->map[y][++x] != '\0')
 		{
 			if (data->map[y][x] == '0')
 				put_water(data, x * 64, y * 64);
@@ -82,7 +82,8 @@ void	put_map_bonus(t_mlx *data)
 			else if (data->map[y][x] == 'E')
 				put_dock(data, x * 64, y * 64);
 			else
-				put_ships(data, y, x);
+				put_ships_bonus(data, y, x);
 		}
 	}
+	destroy_sprites(data);
 }

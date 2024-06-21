@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:17:42 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/18 14:12:36 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/21 14:14:09 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	move_to_e(t_mlx *data, int move_y, int move_x)
 	}
 	data->y += move_y;
 	data->x += move_x;
-	put_map (data);
 }
 
 void	move_to_c_0(t_mlx *data, int move_y, int move_x)
@@ -73,7 +72,6 @@ void	move_to_c_0(t_mlx *data, int move_y, int move_x)
 		data->map[data->y + move_y][data->x + move_x] = 'D';
 	data->y += move_y;
 	data->x += move_x;
-	put_map(data);
 	ft_printf("You moved %d time(s).\n", ++data->moves);
 }
 
@@ -86,20 +84,20 @@ void	move_player(t_mlx *data, int move_y, int move_x)
 		move_to_e(data, move_y, move_x);
 	else
 		dont_move(data, move_y, move_x);
-	put_map(data);
 }
 
-int	pressed_key(t_mlx *data, int key)
+int	pressed_key(t_mlx *data, int key_f)
 {
-	if (key == Q || key == ESC)
+	if (key_f == Q || key_f == ESC)
 		close_window(data);
-	else if (key == A || key == L_ARROW)
+	else if (key_f == A || key_f == L_ARROW)
 		move_player(data, 0, -1);
-	else if (key == D || key == R_ARROW)
+	else if (key_f == D || key_f == R_ARROW)
 		move_player(data, 0, 1);
-	else if (key == W || key == U_ARROW)
+	else if (key_f == W || key_f == U_ARROW)
 		move_player(data, -1, 0);
-	else if (key == S || key == D_ARROW)
+	else if (key_f == S || key_f == D_ARROW)
 		move_player(data, 1, 0);
-	return (key);
+	put_map(data);
+	return (key_f);
 }

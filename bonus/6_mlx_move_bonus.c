@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   4_mlx_move_bonus.c                                 :+:      :+:    :+:   */
+/*   6_mlx_move_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:17:42 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/19 13:07:05 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/21 12:04:03 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	move_to_c_0_bonus(t_mlx *data, int move_y, int move_x)
 	data->x += move_x;
 	put_map_bonus(data);
 	ft_printf("You moved %d time(s).\n", ++data->moves);
-	
 }
 
 void	move_player_bonus(t_mlx *data, int move_y, int move_x)

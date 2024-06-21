@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:50:00 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/18 14:15:19 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/21 14:14:02 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	window(char *file, int w, int h)
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, w * SQ, h * SQ, "so_long");
 	put_map(&data);
-	pressed_key(&data, W);
-	mlx_hook(&data.mlx_win, 2, 1L << 0, pressed_key, &data);
+	mlx_key_hook(&data.mlx_win, pressed_key, &data);
 	mlx_hook(data.mlx_win, 17, 1, close_window, &data);
 	mlx_loop(data.mlx);
 }

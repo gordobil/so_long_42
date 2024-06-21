@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:50:10 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/19 14:48:43 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/21 14:10:56 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@
 # include <stdarg.h>
 # include "./mlx/mlx.h"
 # define SQ 64
-# define Q 12
-# define W 119
-# define A 0
-# define S 1
-# define D 2
-# define ESC 0x35
-# define L_ARROW 123
-# define R_ARROW 124
-# define U_ARROW 126
-# define D_ARROW 125
+# define Q 81
+# define W 87
+# define A 65
+# define S 83
+# define D 68
+# define ESC 27
+# define L_ARROW 37
+# define R_ARROW 39
+# define U_ARROW 38
+# define D_ARROW 40
 # define SHIP_L "./sprites/ship_l.xpm"
 # define SHIP_L_2 "./sprites/bonus/ship_l_2.xpm"
 # define SHIP_R "./sprites/ship_r.xpm"
@@ -101,8 +101,9 @@ char		*ft_itoa(int n);
 
 //MLX UTILS
 int			close_window(t_mlx *data);
+void		destroy_sprites(t_mlx *data);
 t_mlx		*load_sprites(t_mlx *data);
-int			pressed_key(t_mlx *data, int key);
+int			pressed_key(t_mlx *data, int key_f);
 void		put_water(t_mlx *data, int x, int y);
 void		put_cliff(t_mlx *data, int x, int y);
 void		put_buoy(t_mlx *data, int x, int y);

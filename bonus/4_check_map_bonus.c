@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 20:09:59 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/19 13:40:50 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/21 12:22:40 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ int	characters_bonus(int y, int x, char **map)
 	i = 0;
 	while (i < 4)
 		chars[i++] = 0;
-	y = 1;
-	while (map[y++] != NULL)
+	y = -1;
+	while (map[++y] != NULL)
 	{
-		x = 0;
-		while (map[y][x++] != '\0')
+		x = -1;
+		while (map[y][++x] != '\0')
 		{
 			if (map[y][x] == 'P')
 				chars[0] = characters_aux_bonus(chars, 0);
@@ -60,7 +60,7 @@ int	characters_bonus(int y, int x, char **map)
 			else if (map[y][x] != '0' && map[y][x] != '1' && map[y][x] != 'P' &&
 					map[y][x] != 'E' && map[y][x] != 'C' && map[y][x] != 'B' &&
 					map[y][x] != '\0')
-				chars[3] = -1;
+			chars[3] = -1;
 		}
 	}
 	return (characters_ret(chars));
@@ -74,8 +74,10 @@ int	check_map_bonus(char **map)
 
 	if (borders(0, 0, map) != 0)
 		return (-1);
+	ft_printf("1\n");
 	if (characters_bonus(1, 1, map) != 0)
 		return (-1);
+	ft_printf("1\n");
 	start_y = start_coords(map, 'y');
 	start_x = start_coords(map, 'x');
 	if (start_y < 0 || start_x < 0)

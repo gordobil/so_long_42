@@ -6,7 +6,7 @@
 #    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:52:23 by ngordobi          #+#    #+#              #
-#    Updated: 2024/06/19 14:35:25 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/06/21 13:37:29 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ UTILS				=	../utils/
 FT_PRINTF			=	../utils/ft_printf/
 
 MLX					=	../mlx/libmlx_Linux.a
-MLX_FLAGS			=	-L mlx/ -lmlx -lXext -lX11
+MLX_FLAGS			=	-L ../mlx/ -lmlx -lXext -lX11
 
 SOURCES				=	1_so_long_bonus.c \
 						2_check_file_bonus.c \
@@ -40,6 +40,7 @@ SOURCES_UT			=	$(UTILS)ft_count.c \
 						$(UTILS)mlx_put_map.c \
 						$(UTILS)mlx_put_map_bonus.c \
 						$(UTILS)mlx_close_window.c \
+						$(UTILS)mlx_destroy_sprites.c \
 
 SOURCES_PF			=	$(FT_PRINTF)ft_printf.c \
 						$(FT_PRINTF)ft_putchar.c \
@@ -105,7 +106,7 @@ clean:
 				rm -rf ../utils/ft_printf/objects/
 				rm -rf ../utils/ft_printf/*.o
 				make -C ../mlx clean
-				echo "\n·······························"
+				echo "\n·····································"
 				echo "\n· Bonus objects correctly removed."
 
 fclean:			clean
@@ -113,8 +114,7 @@ fclean:			clean
 				echo "· Bonus executable correctly removed."
 
 nl:
-				echo "\n·······························"
+				echo "\n·····································"
 
 re:				fclean nl all
-re bonus:		fclean nl bonus
-.PHONY:			all bonus clean fclean nl re
+.PHONY:			all clean fclean nl re

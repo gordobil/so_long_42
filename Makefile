@@ -6,11 +6,12 @@
 #    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:52:23 by ngordobi          #+#    #+#              #
-#    Updated: 2024/06/19 14:35:25 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/06/21 13:39:13 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME				=	so_long
+NAME_BONUS			=	so_long_bonus
 
 CC					=	gcc
 CC_FLAGS			=	-Wall -Wextra -Werror -g3 -MMD
@@ -40,6 +41,7 @@ SOURCES_UT			=	$(UTILS)ft_count.c \
 						$(UTILS)mlx_put_map.c \
 						$(UTILS)mlx_put_map_bonus.c \
 						$(UTILS)mlx_close_window.c \
+						$(UTILS)mlx_destroy_sprites.c \
 
 SOURCES_PF			=	$(FT_PRINTF)ft_printf.c \
 						$(FT_PRINTF)ft_putchar.c \
@@ -76,8 +78,6 @@ export SO_LONG
 
 all: 			$(NAME)
 
-bonus:			make -C ./bonus all
-
 $(NAME):		$(OBJECTS) $(OBJECTS_UT) $(OBJECTS_PF) $(INCLUDE)
 				make -C ./mlx all
 				$(CC) $(CC_FLAGS) $(OBJECTS) $(OBJECTS_UT) $(OBJECTS_PF) -o $(NAME) $(MLX_FLAGS)
@@ -89,6 +89,11 @@ $(NAME):		$(OBJECTS) $(OBJECTS_UT) $(OBJECTS_PF) $(INCLUDE)
 				mv $(OBJECTS_PF) ./utils/ft_printf/objects/
 				echo "\n\n··················· Compilation complete ···················"
 				echo "$$SO_LONG"
+
+bonus:			$(NAME_BONUS)
+
+$(NAME_BONUS):	./bonus/Makefile
+				make ./bonus/ all
 
 clean:
 				rm -rf ./objects/
@@ -104,13 +109,15 @@ clean:
 				echo "\n·······························"
 				echo "\n· Objects correctly removed."
 
+.SILENT:
+
 fclean:			clean
-				rm -rf $(NAME)
+				rm -rf $(NAME) $(NAME_BONUS)
 				echo "· Executable correctly removed."
 
 nl:
 				echo "\n·······························"
 
 re:				fclean nl all
-re bonus:		fclean nl bonus
+rebonus:		fclean nl bonus
 .PHONY:			all bonus clean fclean nl re
