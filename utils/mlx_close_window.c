@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_close_window.c                                 :+:      :+:    :+:   */
+/*   mlx_close_window_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "../so_long.h"
 
-int	close_window(t_mlx *data, int close)
+int	close_window_bonus(t_mlx *data, int close)
 {
 	if (close == 0 || close == 320)
 		ft_printf("You closed the game :(\n");
@@ -31,9 +31,4 @@ int	close_window(t_mlx *data, int close)
 	ft_free_map(data->map);
 	exit(EXIT_SUCCESS);
 	return (0);
-}
-
-int	no_event(void *data)
-{
-    return (0);
 }
