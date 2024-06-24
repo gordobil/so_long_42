@@ -49,12 +49,12 @@ void	move_to_e_b_bonus(t_mlx *data, int move_y, int move_x)
 	if (data->coins == 0 && (data->map[data->y + move_y][data->x + move_x]
 		== 'X' || data->map[data->y + move_y][data->x + move_x] == 'Y'))
 	{
-		close_window(data, 0);
+		close_window_bonus(data, 1);
 		return ;
 	}
 	else if (data->map[data->y + move_y][data->x + move_x] == 'B')
 	{
-		close_window(data, -1);
+		close_window_bonus(data, -1);
 		return ;
 	}
 	else
@@ -102,7 +102,7 @@ void	move_player_bonus(t_mlx *data, int move_y, int move_x)
 int	handle_input_bonus(int keysym, t_mlx *data)
 {
 	if (keysym == Q || keysym == ESC)
-		close_window(data, 1);
+		close_window_bonus(data, 0);
 	else if (keysym == A || keysym == L_ARROW)
 		move_player_bonus(data, 0, -1);
 	else if (keysym == D || keysym == R_ARROW)
