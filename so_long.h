@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:50:10 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/21 14:10:56 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/24 14:37:39 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@
 # include <stdarg.h>
 # include "./mlx/mlx.h"
 # define SQ 64
-# define Q 81
-# define W 87
-# define A 65
-# define S 83
-# define D 68
-# define ESC 27
-# define L_ARROW 37
-# define R_ARROW 39
-# define U_ARROW 38
-# define D_ARROW 40
+# define Q 113
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+# define ESC 65307
+# define L_ARROW 65361
+# define R_ARROW 65363
+# define U_ARROW 65362
+# define D_ARROW 65364
 # define SHIP_L "./sprites/ship_l.xpm"
 # define SHIP_L_2 "./sprites/bonus/ship_l_2.xpm"
 # define SHIP_R "./sprites/ship_r.xpm"
@@ -56,7 +56,7 @@ typedef struct s_mlx
 	int			moves;
 	int			animation;
 	void		*mlx;
-	void		*mlx_win;
+	void		*win;
 	char		*addr;
 	int			bits_per_pixel;
 	int			line_length;
@@ -100,15 +100,17 @@ int			count(char **map, char axis);
 char		*ft_itoa(int n);
 
 //MLX UTILS
-int			close_window(t_mlx *data);
+int			close_window(t_mlx *data, int close);
 void		destroy_sprites(t_mlx *data);
 t_mlx		*load_sprites(t_mlx *data);
-int			pressed_key(t_mlx *data, int key_f);
+int			handle_input(int keysym, t_mlx *data);
 void		put_water(t_mlx *data, int x, int y);
 void		put_cliff(t_mlx *data, int x, int y);
 void		put_buoy(t_mlx *data, int x, int y);
 void		put_dock(t_mlx *data, int x, int y);
 void		put_map(t_mlx *data);
+void		put_counter(t_mlx *data);
+int			no_event(void *data);
 
 //FT_PRINTF
 int			ft_printf(const char *arg, ...);
@@ -125,7 +127,7 @@ int			meassure_map_bonus(char *file, char axis);
 char		**load_map_bonus(char *file, int w, int h);
 int			check_map_bonus(char **map);
 int			find_exit_bonus(int y, int x, char **map);
-int			pressed_key_bonus(t_mlx *data, int key);
+int			handle_input_bonus(int keysym, t_mlx *data);
 void		put_map_bonus(t_mlx *data);
 
 #endif

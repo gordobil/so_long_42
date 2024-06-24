@@ -6,7 +6,7 @@
 #    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:52:23 by ngordobi          #+#    #+#              #
-#    Updated: 2024/06/21 13:37:29 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/06/24 12:44:27 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SOURCES_UT			=	$(UTILS)ft_count.c \
 						$(UTILS)mlx_put_sprites.c \
 						$(UTILS)mlx_put_map.c \
 						$(UTILS)mlx_put_map_bonus.c \
+						$(UTILS)mlx_put_counter.c \
 						$(UTILS)mlx_close_window.c \
 						$(UTILS)mlx_destroy_sprites.c \
 

@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:17:42 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/21 14:14:09 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/24 14:54:03 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,12 @@ void	move_to_e(t_mlx *data, int move_y, int move_x)
 	ft_printf ("You moved %d time(s).\n", ++data->moves);
 	if (data->coins == 0)
 	{
-		close_window (data);
-		ft_printf ("You won !!\n");
+		close_window (data, 1);
 		return ;
 	}
+	else
+		ft_printf("Collect all the buoys (%d) and bring them to the island.\n",
+				data->coins);
 	data->y += move_y;
 	data->x += move_x;
 }
@@ -56,7 +58,7 @@ void	move_to_e(t_mlx *data, int move_y, int move_x)
 void	move_to_c_0(t_mlx *data, int move_y, int move_x)
 {
 	if (data->map[data->y + move_y][data->x + move_x] == 'C')
-		ft_printf ("There are %d buoys left.\n", --data->coins);
+		ft_printf ("There are/is %d buoy(s) left.\n", --data->coins);
 	if (data->map[data->y][data->x] == 'X' ||
 		data->map[data->y][data->x] == 'Y')
 		data->map[data->y][data->x] = 'E';
@@ -86,18 +88,19 @@ void	move_player(t_mlx *data, int move_y, int move_x)
 		dont_move(data, move_y, move_x);
 }
 
-int	pressed_key(t_mlx *data, int key_f)
+int	handle_input(int keysym, t_mlx *data)
 {
-	if (key_f == Q || key_f == ESC)
-		close_window(data);
-	else if (key_f == A || key_f == L_ARROW)
+	if (keysym == Q || keysym == ESC)
+		close_window(data, 0);
+	else if (keysym == A || keysym == L_ARROW)
 		move_player(data, 0, -1);
-	else if (key_f == D || key_f == R_ARROW)
+	else if (keysym == D || keysym == R_ARROW)
 		move_player(data, 0, 1);
-	else if (key_f == W || key_f == U_ARROW)
+	else if (keysym == W || keysym == U_ARROW)
 		move_player(data, -1, 0);
-	else if (key_f == S || key_f == D_ARROW)
+	else if (keysym == S || keysym == D_ARROW)
 		move_player(data, 1, 0);
 	put_map(data);
-	return (key_f);
+	put_counter(data);
+	return (0);
 }

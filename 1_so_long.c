@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:50:00 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/21 14:14:02 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/24 14:34:02 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,23 @@
 
 void	window(char *file, int w, int h)
 {
-	t_mlx	data;
+	t_mlx	game;
 
-	data.map = load_map(file, w, h);
-	data.y = start_coords(data.map, 'y');
-	data.x = start_coords(data.map, 'x');
-	data.coins = count(data.map, 'C');
-	data.moves = 0;
-	data.mlx = mlx_init();
-	data.mlx_win = mlx_new_window(data.mlx, w * SQ, h * SQ, "so_long");
-	put_map(&data);
-	mlx_key_hook(&data.mlx_win, pressed_key, &data);
-	mlx_hook(data.mlx_win, 17, 1, close_window, &data);
-	mlx_loop(data.mlx);
+	game.map = load_map(file, w, h);
+	game.y = start_coords(game.map, 'y');
+	game.x = start_coords(game.map, 'x');
+	game.coins = count(game.map, 'C');
+	game.moves = 0;
+	game.mlx = mlx_init();
+    game.win = mlx_new_window(game.mlx, w * SQ, h * SQ, "so_long");
+	put_map(&game);
+	put_counter(&game);
+	ft_printf("Collect all the buoys (%d) and bring them to the island.",
+				game.coins);
+	mlx_loop_hook(game.mlx, &no_event, &game);
+	mlx_hook(game.win, 17, 1, close_window, &game);
+    mlx_key_hook(game.win, &handle_input, &game);
+    mlx_loop(game.mlx);
 }
 
 void	so_long(char *file)

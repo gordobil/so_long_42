@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 20:09:59 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/06/21 12:22:40 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/06/24 14:49:13 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,8 @@ int	check_map_bonus(char **map)
 
 	if (borders(0, 0, map) != 0)
 		return (-1);
-	ft_printf("1\n");
 	if (characters_bonus(1, 1, map) != 0)
 		return (-1);
-	ft_printf("1\n");
 	start_y = start_coords(map, 'y');
 	start_x = start_coords(map, 'x');
 	if (start_y < 0 || start_x < 0)

@@ -6,7 +6,7 @@
 #    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:52:23 by ngordobi          #+#    #+#              #
-#    Updated: 2024/06/21 13:39:13 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/06/24 13:22:45 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SOURCES_UT			=	$(UTILS)ft_count.c \
 						$(UTILS)mlx_put_sprites.c \
 						$(UTILS)mlx_put_map.c \
 						$(UTILS)mlx_put_map_bonus.c \
+						$(UTILS)mlx_put_counter.c \
 						$(UTILS)mlx_close_window.c \
 						$(UTILS)mlx_destroy_sprites.c \
 
@@ -93,7 +94,8 @@ $(NAME):		$(OBJECTS) $(OBJECTS_UT) $(OBJECTS_PF) $(INCLUDE)
 bonus:			$(NAME_BONUS)
 
 $(NAME_BONUS):	./bonus/Makefile
-				make ./bonus/ all
+				make -C ./bonus/ all
+				mv ./bonus/so_long_bonus ./
 
 clean:
 				rm -rf ./objects/
@@ -108,8 +110,6 @@ clean:
 				make -C ./bonus fclean
 				echo "\n·······························"
 				echo "\n· Objects correctly removed."
-
-.SILENT:
 
 fclean:			clean
 				rm -rf $(NAME) $(NAME_BONUS)
