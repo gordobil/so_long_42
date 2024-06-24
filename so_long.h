@@ -101,6 +101,7 @@ char		*ft_itoa(int n);
 
 //MLX UTILS
 int			close_window(t_mlx *data, int close);
+int			close_window_bonus(t_mlx *data, int close);
 void		destroy_sprites(t_mlx *data);
 t_mlx		*load_sprites(t_mlx *data);
 int			handle_input(int keysym, t_mlx *data);
