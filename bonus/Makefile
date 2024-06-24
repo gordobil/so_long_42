@@ -37,10 +37,9 @@ SOURCES_UT			=	$(UTILS)ft_count.c \
 						$(UTILS)ft_start_coords.c \
 						$(UTILS)mlx_load_sprites.c \
 						$(UTILS)mlx_put_sprites.c \
-						$(UTILS)mlx_put_map.c \
 						$(UTILS)mlx_put_map_bonus.c \
 						$(UTILS)mlx_put_counter.c \
-						$(UTILS)mlx_close_window.c \
+						$(UTILS)mlx_close_window_bonus.c \
 						$(UTILS)mlx_destroy_sprites.c \
 
 SOURCES_PF			=	$(FT_PRINTF)ft_printf.c \
