@@ -101,6 +101,5 @@ int	handle_input(int keysym, t_mlx *data)
 	else if (keysym == S || keysym == D_ARROW)
 		move_player(data, 1, 0);
 	put_map(data);
-	put_counter(data);
 	return (0);
 }
