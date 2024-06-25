@@ -19,7 +19,7 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include "./mlx/mlx.h"
-# define SQ 64
+# define SQ 96
 # define Q 113
 # define W 119
 # define A 97
