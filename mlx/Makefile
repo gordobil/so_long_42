@@ -10,7 +10,6 @@
 
 ## Please use configure script
 
-.SILENT:
 
 all	: do_configure
 

@@ -38,7 +38,7 @@ SOURCES_UT			=	$(UTILS)ft_count.c \
 						$(UTILS)mlx_load_sprites.c \
 						$(UTILS)mlx_put_sprites.c \
 						$(UTILS)mlx_put_map_bonus.c \
-						$(UTILS)mlx_put_counter.c \
+						$(UTILS)mlx_put_messages.c \
 						$(UTILS)mlx_close_window_bonus.c \
 						$(UTILS)mlx_destroy_sprites.c \
 

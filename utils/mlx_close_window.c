@@ -34,5 +34,5 @@ int	close_window(t_mlx *data, int close)
 
 int	no_event(void *data)
 {
-    return (0);
+	return (0);
 }

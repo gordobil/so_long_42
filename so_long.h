@@ -110,8 +110,8 @@ void		put_cliff(t_mlx *data, int x, int y);
 void		put_buoy(t_mlx *data, int x, int y);
 void		put_dock(t_mlx *data, int x, int y);
 void		put_map(t_mlx *data);
-void		put_counter(t_mlx *data);
 int			no_event(void *data);
+int			no_event_bonus(void *data);
 
 //FT_PRINTF
 int			ft_printf(const char *arg, ...);
@@ -130,5 +130,6 @@ int			check_map_bonus(char **map);
 int			find_exit_bonus(int y, int x, char **map);
 int			handle_input_bonus(int keysym, t_mlx *data);
 void		put_map_bonus(t_mlx *data);
+void		put_messages(t_mlx *data, int mark);
 
 #endif

@@ -60,7 +60,7 @@ int	characters_bonus(int y, int x, char **map)
 			else if (map[y][x] != '0' && map[y][x] != '1' && map[y][x] != 'P' &&
 					map[y][x] != 'E' && map[y][x] != 'C' && map[y][x] != 'B' &&
 					map[y][x] != '\0')
-			chars[3] = -1;
+				chars[3] = -1;
 		}
 	}
 	return (characters_ret(chars));

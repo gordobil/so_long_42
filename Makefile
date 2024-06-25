@@ -105,13 +105,14 @@ clean:
 				rm -rf ./utils/ft_printf/objects/
 				rm -rf ./utils/ft_printf/*.o
 				make -C ./mlx clean
-				make -C ./bonus fclean
+				make -C ./bonus clean
 				echo "\n·······························"
 				echo "\n· Objects correctly removed."
 
 fclean:			clean
 				rm -rf $(NAME) $(NAME_BONUS)
 				echo "· Executable correctly removed."
+				make -C ./bonus fclean
 
 nl:
 				echo "\n·······························"

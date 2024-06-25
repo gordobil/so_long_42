@@ -22,15 +22,19 @@ void	window_bonus(char *file, int w, int h)
 	game.coins = count(game.map, 'C');
 	game.moves = 0;
 	game.mlx = mlx_init();
-    game.win = mlx_new_window(game.mlx, w * SQ, h * SQ, "so_long_bonus");
+	if (!game.mlx)
+	{
+		ft_printf("Error\nError initializing minilibx\n");
+		return ;
+	}
+	game.win = mlx_new_window(game.mlx, w * SQ, h * SQ, "so_long_bonus");
 	put_map_bonus(&game);
-	put_counter(&game);
 	ft_printf("Collect all the buoys (%d) and bring them to the island.\n",
-				game.coins);
-	mlx_loop_hook(game.mlx, &no_event, &game);
-	mlx_hook(game.win, 17, 1, close_window, &game);
-    mlx_key_hook(game.win, &handle_input_bonus, &game);
-    mlx_loop(game.mlx);
+		game.coins);
+	mlx_loop_hook(game.mlx, &no_event_bonus, &game);
+	mlx_hook(game.win, 17, 1, close_window_bonus, &game);
+	mlx_key_hook(game.win, &handle_input_bonus, &game);
+	mlx_loop(game.mlx);
 }
 
 void	so_long_bonus(char *file)

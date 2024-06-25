@@ -35,14 +35,14 @@ void	dont_move_bonus(t_mlx *data, int move_y, int move_x)
 	}
 }
 
-void	move_to_e_b_bonus(t_mlx *data, int move_y, int move_x)
+int	move_to_e_b_bonus(t_mlx *data, int move_y, int move_x)
 {
 	if (data->map[data->y + move_y][data->x + move_x] == 'E')
 	{
 		if (move_x < 0 || move_y < 0)
-			data->map[data->y + move_y][data->x + move_x] = 'Y';
-		else if (move_x > 0 || move_y > 0)
 			data->map[data->y + move_y][data->x + move_x] = 'X';
+		else if (move_x > 0 || move_y > 0)
+			data->map[data->y + move_y][data->x + move_x] = 'Y';
 	}
 	data->map[data->y][data->x] = '0';
 	ft_printf("You moved %d time(s).\n", ++data->moves);
@@ -50,24 +50,25 @@ void	move_to_e_b_bonus(t_mlx *data, int move_y, int move_x)
 		== 'X' || data->map[data->y + move_y][data->x + move_x] == 'Y'))
 	{
 		close_window_bonus(data, 1);
-		return ;
+		return (0);
 	}
 	else if (data->map[data->y + move_y][data->x + move_x] == 'B')
 	{
 		close_window_bonus(data, -1);
-		return ;
+		return (0);
 	}
-	else
-		ft_printf("Collect all the buoys (%d) and bring them to the island.",
-				data->coins);
 	data->y += move_y;
 	data->x += move_x;
+	return (2);
 }
 
-void	move_to_c_0_bonus(t_mlx *data, int move_y, int move_x)
+int	move_to_c_0_bonus(t_mlx *data, int move_y, int move_x)
 {
+	int	ret;
+
+	ret = 0;
 	if (data->map[data->y + move_y][data->x + move_x] == 'C')
-		ft_printf("There are/is %d buoy(s) left.\n", --data->coins);
+		ret = 1;
 	if (data->map[data->y][data->x] == 'X' ||
 		data->map[data->y][data->x] == 'Y')
 		data->map[data->y][data->x] = 'E';
@@ -84,34 +85,42 @@ void	move_to_c_0_bonus(t_mlx *data, int move_y, int move_x)
 	data->y += move_y;
 	data->x += move_x;
 	ft_printf("You moved %d time(s).\n", ++data->moves);
+	return (ret);
 }
 
-void	move_player_bonus(t_mlx *data, int move_y, int move_x)
+int	move_player_bonus(t_mlx *data, int move_y, int move_x)
 {
+	int	ret;
+
+	ret = 0;
 	data->animation++;
 	if (data->map[data->y + move_y][data->x + move_x] == '0' ||
 		data->map[data->y + move_y][data->x + move_x] == 'C')
-		move_to_c_0_bonus(data, move_y, move_x);
+		ret = move_to_c_0_bonus(data, move_y, move_x);
 	else if (data->map[data->y + move_y][data->x + move_x] == 'E' ||
 			data->map[data->y + move_y][data->x + move_x] == 'B')
-		move_to_e_b_bonus(data, move_y, move_x);
+		ret = move_to_e_b_bonus(data, move_y, move_x);
 	else
 		dont_move_bonus(data, move_y, move_x);
+	return (ret);
 }
 
 int	handle_input_bonus(int keysym, t_mlx *data)
 {
+	int	ret;
+
+	ret == 0;
 	if (keysym == Q || keysym == ESC)
-		close_window_bonus(data, 0);
+		ret = close_window_bonus(data, 0);
 	else if (keysym == A || keysym == L_ARROW)
-		move_player_bonus(data, 0, -1);
+		ret = move_player_bonus(data, 0, -1);
 	else if (keysym == D || keysym == R_ARROW)
-		move_player_bonus(data, 0, 1);
+		ret = move_player_bonus(data, 0, 1);
 	else if (keysym == W || keysym == U_ARROW)
-		move_player_bonus(data, -1, 0);
+		ret = move_player_bonus(data, -1, 0);
 	else if (keysym == S || keysym == D_ARROW)
-		move_player_bonus(data, 1, 0);
+		ret = move_player_bonus(data, 1, 0);
 	put_map_bonus(data);
-	put_counter(data);
+	put_messages(data, ret);
 	return (0);
 }

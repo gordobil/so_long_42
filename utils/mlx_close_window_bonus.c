@@ -18,8 +18,8 @@ int	close_window_bonus(t_mlx *data, int close)
 		ft_printf("You closed the game :(\n");
 	else if (close == 1 || close == -1)
 	{
-		put_map(data);
-		put_counter(data);
+		put_map_bonus(data);
+		put_messages(data, 0);
 		if (close == 1)
 			ft_printf ("You won !!\n");
 		else
@@ -30,5 +30,10 @@ int	close_window_bonus(t_mlx *data, int close)
 	free(data->mlx);
 	ft_free_map(data->map);
 	exit(EXIT_SUCCESS);
+	return (0);
+}
+
+int	no_event_bonus(void *data)
+{
 	return (0);
 }

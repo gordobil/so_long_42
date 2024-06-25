@@ -50,7 +50,7 @@ void	move_to_e(t_mlx *data, int move_y, int move_x)
 	}
 	else
 		ft_printf("Collect all the buoys (%d) and bring them to the island.\n",
-				data->coins);
+			data->coins);
 	data->y += move_y;
 	data->x += move_x;
 }
